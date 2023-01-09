@@ -1,0 +1,95 @@
+<div class="container" [ngClass]="updateMessage || deleteMessage ||createMessage ? 'active-container' : ''">
+  <div *ngIf="!loading; else loader">
+    <div id="item-container" class="item-container">
+      <div class="item-container__nav ">
+        <a [routerLink]="'/database'" class="navigation__btn non-link-style icon-arrow_long hover-color">Back</a>
+
+        <button class="navigation__btn non-btn-style  glow-on-hover" [ngClass]="{'active-settings': activeSettings}"
+          (click)="activeSettings = !activeSettings">
+
+          <button class="button non-btn-style " (click)="createPosition()">Add new</button>
+          <button class="button non-btn-style" (click)="updatePosition(position)">Update</button>
+          <button class="button non-btn-style" (click)="deletePosition(position)">Delete</button>
+
+        </button>
+
+      </div>
+      <div class="item-container__item position-item">
+        <div class="position-item__header position-header">
+          <div class="position-header__title">{{position.name | titlecase}}</div>
+          <button class="position-header__btn icon-share non-btn-style  glow-on-hover" (click)="shareLink()"></button>
+        </div>
+        <div class="position-item__description ">
+          <div id="description" class="description custom-scrollbar">
+            {{position.description}}</div>
+        </div>
+
+        <div class="image-list" *ngIf="images$ | async as images">
+          <div *ngIf="images.length !==0 ; else empty" class="slider">
+            <div *ngFor="let image of images; let i =index">
+              <div [id]="i"
+                [ngClass]="{'slide-active': selectedIndex === i, 'prev-slide': selectedIndex > i, 'next-slide': selectedIndex < i  }"
+                *ngIf="image.imageSRC!==''" class="position-item__slider slide">
+                <div class="slide__color position__color-ch non-btn-style" [style]="{backgroundColor: image.color}">
+                </div>
+                <div class="slide__image">
+                  <img [src]="image.imageSRC" [alt]="position.name + ' ' + i">
+                </div>
+                <div class="slide__image-creator">
+                  <img src="" alt="">
+                </div>
+              </div>
+            </div>
+          </div>
+          <div class=" slider__dots">
+            <span (click)="selectImage(number)" *ngFor="let i of images; let number = index" class="dot"
+              [ngClass]="{'dot-active': selectedIndex === number}" [style]="{backgroundColor: i.color}"></span>
+          </div>
+          <div *ngIf="images.length !==0 " class="slider__nav-arrows nav-arrow">
+            <span class="nav-arrow__prev icon-arrow_long" (click)="selectImage(selectedIndex-1)"></span>
+            <span class="nav-arrow__next icon-arrow_long" (click)="selectImage(selectedIndex+1)"></span>
+          </div>
+
+        </div>
+
+      </div>
+      <div class="item-container__menu menu-items">
+        <button class="menu-items__item non-btn-style hover-color" (click)="uploadPositionImage(position)">Select from
+          gallery</button>
+        <button class="menu-items__item non-btn-style hover-color" (click)="downloadActiveImage()">Take a
+          picture</button>
+      </div>
+    </div>
+  </div>
+  <ng-template #empty>
+    <div class="empty">
+      There is no images
+    </div>
+
+  </ng-template>
+  <ng-template #loader>
+    <app-loader></app-loader>
+  </ng-template>
+
+  <div *ngIf="updateMessage || deleteMessage ||createMessage" class="message">
+    <div *ngIf="updateMessage" class="message__text">
+      The position item was successfully updated
+    </div>
+    <div *ngIf="deleteMessage" class="message__text">
+      The position item was {{deleteSuccess ? 'successfully' : ' not' }} deleted
+    </div>
+    <div *ngIf="createMessage" class="message__text">
+      The position item was successfully added
+    </div>
+  </div>
+
+
+
+  <div *ngIf="copyLink" class="copy-link-success">
+
+    The link was successfully copied!!!
+
+  </div>
+
+
+</div>

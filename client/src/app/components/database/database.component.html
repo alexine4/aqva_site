@@ -1,0 +1,169 @@
+<div class="container">
+  <div class="database-container">
+    <div class="category-header">
+      <div class="category-header__title">{{menuTitle === '' ? 'Animals & Plants': menuTitle | titlecase}}
+        <span>{{score}}</span>
+      </div>
+
+      <div class="category-header__search search">
+        <input type="text" class="search__input" placeholder="Search..." [(ngModel)]="find">
+        <button class="search__filter-btn non-btn-style icon-filter hover-color-text-mod"
+          (click)="search(find)"></button>
+      </div>
+
+      <div class="category-header__filter">
+        <button [disabled]="activeAz" class="sort-filter-btn non-btn-style active"
+          (click)="sortParam ='A-Z'; activeAz = true; activeZa = false" [ngClass]="{'active': activeAz}">A-Z</button>
+        <button [disabled]="activeZa" class="sort-filter-btn non-btn-style"
+          (click)="sortParam ='Z-A'; activeAz = false; activeZa = true" [ngClass]="{'active': activeZa}">Z-A</button>
+      </div>
+    </div>
+
+
+
+    <div *ngIf="viewPositions$ | async as viewPositions" class="category-positions "
+      [ngClass]="{'custom-scrollbar': viewPositions.length > 2, 'non-scroll-bar': viewPositions.length <= 2}">
+      <div *ngIf="viewPositions.length !==0 ; else empty" class="category-positions__wraperr ">
+
+        <div *ngFor="let viewPosition of viewPositions | filterProducts:find | sorterProducts: sortParam"
+          class="position hover-border" [routerLink]="['/database/product-item/', viewPosition.idPosition]">
+
+          <div *ngIf="images.length > 0 ; else loader" class="position__image">
+            <div *ngFor="let image of images">
+
+              <img class="image-box"
+                [ngClass]="{'image-box__active': viewPosition.idPosition === image.idPosition && image.active}"
+                *ngIf="viewPosition.idPosition === image.idPosition" [src]="image.imageSRC" alt="position__image">
+
+
+            </div>
+            <div class="position__color">
+              <div *ngFor="let color of images">
+                <button *ngIf="viewPosition.idPosition === color.idPosition " class="position__color-ch non-btn-style"
+                  [style.background]="color.color"
+                  (click)="changeImageForColor( color.idPosition,color.color,$event)"></button>
+              </div>
+            </div>
+          </div>
+          <div class="position__title">{{viewPosition.name}}</div>
+          <div class="position__description">{{viewPosition.description}}</div>
+
+        </div>
+      </div>
+    </div>
+
+
+  </div>
+
+  <div class="menu-container">
+    <div id="menu" class="category-menu ">
+      <button class="category-menu__button non-btn-style icon-arrow arrow-up hover-color"
+        (click)="menuActive()">Category</button>
+      <button class="back icon-arrow_long non-btn-style hover-color"
+        *ngIf="!firstLayer||secondLayer||thirdLayer||forsLayer" (click)="back()"> Back</button>
+      <div id="list" class="categories-list custom-scrollbar hide">
+
+
+        <div *ngIf="firstLayer" class="first-layer">
+          <div *ngIf="categories$ | async as categories;else loader">
+            <div class="categories-list__acive-category"> {{'Animals & Plants' | titlecase}}
+              <span>{{score}}
+                results</span>
+            </div>
+            <div class="categories-list__list " *ngIf="categories.length !==0 ; else empty">
+              <button *ngFor="let category of categories" class="category hover-color icon-arrow non-btn-style"
+                (click)="secondLevel(category.idCategories,category.name)">
+                <div class="button-functional">
+                  <div class="active-button">
+                    <button (click)="reductItem($event,category.idCategories,category.name,'','Category')"
+                      class="update-icon non-btn-style"></button>
+                    <button class="delete-icon non-btn-style"></button>
+                  </div>
+                  {{category.name | titlecase}}
+                </div>
+
+              </button>
+
+            </div>
+
+            <button (click)="addNewCategory()" type="button"
+              class="categories-list__new-element hover-color icon-plus non-btn-style">
+              Add new category
+            </button>
+
+          </div>
+        </div>
+
+
+
+        <div *ngIf="secondLayer" class="second-layer">
+          <div *ngIf="types$ | async as types">
+            <div class="categories-list__acive-category"> {{menuTitle | titlecase}}
+              <span>{{score}}
+                results</span>
+            </div>
+            <div class="categories-list__list " *ngIf="types.length !==0 ; else empty">
+              <button *ngFor="let type of types" class="category hover-color icon-arrow non-btn-style"
+                (click)="thirdLevel(type.idType, type.name)">{{type.name | titlecase}}</button>
+
+            </div>
+            <button (click)="addNewType()" type="button"
+              class="categories-list__new-element hover-color icon-plus non-btn-style">
+              Add new type
+            </button>
+          </div>
+        </div>
+
+        <div *ngIf="thirdLayer" class="third-layer">
+          <div *ngIf="genusies$ | async as genusies">
+            <div class="categories-list__acive-category"> {{menuTitle | titlecase}}
+              <span>{{score}}
+                results</span>
+            </div>
+            <div class="categories-list__list " *ngIf="genusies.length !==0 ; else empty">
+              <button *ngFor="let genus of genusies" class="category hover-color icon-arrow non-btn-style"
+                (click)="forsLevel(genus.idGenus, genus.name); ">{{genus.name | titlecase}}</button>
+
+            </div>
+            <button (click)="addNewGenus()" type="button"
+              class="categories-list__new-element hover-color icon-plus non-btn-style">
+              Add new genus
+            </button>
+          </div>
+        </div>
+
+        <div *ngIf="forsLayer" class="fors-layer">
+          <div *ngIf="positions$ | async as positions">
+            <div class="categories-list__acive-category"> {{menuTitle | titlecase}}
+              <span>{{score}}
+                results</span>
+            </div>
+            <div class="categories-list__list " *ngIf="positions.length !==0 ; else empty">
+              <a *ngFor="let position of positions" [routerLink]="['/database/product-item/', position.idPosition]"
+                class="category hover-color icon-arrow non-link-style">{{position.name | titlecase}}</a>
+
+            </div>
+            <button (click)="addNewPosition()" type="button"
+              class="categories-list__new-element hover-color icon-plus non-btn-style">
+              Add new position
+            </button>
+          </div>
+        </div>
+
+        <ng-template #empty>
+          <div class="empty">
+            There is no menu item
+          </div>
+
+        </ng-template>
+      </div>
+    </div>
+  </div>
+
+</div>
+
+<ng-template #loader>
+  <div class="loader">
+    <app-loader></app-loader>
+  </div>
+</ng-template>

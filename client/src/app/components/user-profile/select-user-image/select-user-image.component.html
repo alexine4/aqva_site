@@ -1,0 +1,18 @@
+<div class="image-container">
+  <div class="image-container__header">Upload image to user: <span>{{data.username | titlecase}}</span></div>
+  <div class="image-container__image" (click)="uploadClick()">
+    <img class="responsive-img h200" [src]="imagePreview" *ngIf="imagePreview">
+  </div>
+  <div class="image-container__btn">
+    <input type="file" (change)="onFileUpload($event)" class="dn" #input>
+    <button (click)="uploadClick()" class="file-Upload non-btn-style hover-color" type="button">
+      <i class="material-icons left">backup</i>
+      Download image
+    </button>
+
+    <div class="actions-btn">
+      <button class="action-btn non-btn-style hover-color" (click)="onNoClick()"> Cancel</button>
+      <button class="action-btn non-btn-style hover-color" [disabled]="disabled" (click)="uploadImage()"> Ok</button>
+    </div>
+  </div>
+</div>

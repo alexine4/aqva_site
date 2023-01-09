@@ -1,0 +1,154 @@
+$md1:1440px;
+$md2:978px;
+$md3:768px;
+$md4:450px;
+.image-container {
+	display: flex;
+	flex-direction: column;
+	justify-content: center;
+	align-items: center;
+width: 400px;
+height: 440px;
+	@media (min-width: $md3){
+		width: 500px;
+	height: 540px;
+	}
+	@media (max-width: $md4){
+	width: 300px;
+	height: 490px;
+	}
+
+	// .image-container__header
+
+	&__header {
+		height: 40px;
+		font-size: 18px;
+		font-weight: 400;
+		line-height: 24px;
+		margin: 0 0 10px 0;
+	span{
+		font-size: 22px;
+		font-weight: 700;
+		line-height: 28px;
+	}
+	}
+
+	// .image-container__image
+
+	&__image {
+		margin: 0 0 10px 0;
+		height: 230px;
+		width: 300px;
+		border: 1px solid rgb(57, 142, 199);
+		border-radius: 15px;
+
+		img{
+		height: inherit;
+		width: inherit;
+		border-radius: 15px;
+	
+		}
+		@media (max-width: $md3){
+			margin: 0 0 5px 0;
+			height: 280px;
+		width: 330px;
+	
+		
+		}
+		@media (min-width: $md3){
+		
+			height: 350px;
+			width: 400px;
+			
+		}
+
+	}
+
+	// .image-container__btn
+
+	&__btn {
+		display: flex;
+		align-items: center;
+		justify-content: center;
+		flex-direction: column;
+		
+
+	}
+}
+
+.color-picker {
+display: flex;
+flex-direction: row;
+align-items:center ;
+justify-content: space-between;
+height: 40px;
+	// .color-picker__title
+
+	&__title {
+		font-size: 18px;
+		line-height: 24px;
+	}
+
+	// .color-picker__button
+
+	&__button{
+		content: ' ';
+		background: #000;
+		cursor: pointer;
+		margin: 0 0 0 15px;
+		border: none;
+		border-radius:50%;
+		width: 40px;
+		height: 40px;
+		
+		
+	}
+}
+
+.center{
+	position: relative;
+top: 300px;
+left: 400px;
+}
+
+.dn {
+	display:none;
+}
+.file-Upload {
+	display: flex;
+	align-items: center;
+	justify-content: center;
+	width: 250px;
+	font-weight: 700;
+	font-size: 18px;
+	line-height: 24px;
+	height: 40px;
+	cursor: pointer;
+	i{
+		margin: 0 15px;
+	}
+}
+
+.actions-btn {
+	display: flex;
+	flex-direction: row;
+	justify-content:space-between ;
+	align-items: center;
+	width: 300px;
+	
+	margin: 10px 0;
+	@media (max-width: $md3){
+	width: 330px;
+	}
+	@media (min-width: $md3){
+	width: 450px;
+	}
+}
+.action-btn {
+	cursor: pointer;
+	font-size: 26px;
+	font-weight: 400;
+	height: 50px;
+	width: 150px;
+
+}

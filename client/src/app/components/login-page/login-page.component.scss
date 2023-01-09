@@ -1,0 +1,123 @@
+$md1:1440px;
+$md2:1024px;
+$md3:768px;
+$md4:430px;
+
+
+.sing-in-forms {
+	display: flex;
+	left: 0;
+	top: 0;
+	justify-content: center;
+	align-items: center;
+	flex-direction: column;
+	// .account-forms__header
+
+	&__header {
+		
+
+font-weight: 700;
+font-size: 20px;
+text-align: center;
+
+color: #000000;
+p{
+	margin: 5px 0 ;
+	font-size: 14px;
+	font-weight: 400;
+	
+color: #818181;
+}
+@media (min-width: $md3){
+	font-size: 26px;
+		
+		p{	font-size: 20px;}
+	
+	
+}
+
+	}
+
+	// .login-forms__form
+
+	&__form {
+		display: flex;
+		justify-content: center;
+	align-items: center;
+	flex-direction: column;
+	margin: 15px ;
+	.btn{
+	@media (min-width: $md3){
+	&:hover{
+		background-color: rgb(71, 71, 71);
+		}
+	}
+	padding: 1px 2px;
+		background-color: #000;
+		color: #fff;
+		margin:  5px;
+	
+		
+		border-radius: 10px;
+		height: 45px;
+		font-size: 14px;
+		width: 300px;
+	
+		@media (min-width: $md4){
+		font-size: 26px;
+		height: 55px;
+		width:  420px;
+		margin: 10px;
+		}
+	}
+	
+}
+
+.input {
+	margin: 5px;
+	height: 45px;
+	width: 300px;
+	border-radius: 10px;
+	
+
+@media (min-width: $md4){
+font-size: 20px;
+width: 420px;
+height: 55px;
+margin: 10px;
+}
+
+}
+}
+.form-error{
+	font-size: 16px;
+	font-weight: 700;
+}
+
+
+.action-btn{
+	cursor: pointer;
+	display: flex;
+	width: 300px;
+	max-width: 550px;
+	align-items: center;
+	justify-content: start;
+	margin: 5px 0;
+	font-weight: 700;
+font-size: 14px;
+line-height: 17px;
+@media (min-width: $md4){
+width: 420px;
+}
+@media (min-width: $md3){
+&:hover{
+	color: rgb(197, 21, 21);
+}
+}
+
+color: #000000;
+span{
+	margin: 0 10px 0 0 ;
+font-weight: 400;
+}
+}

@@ -1,0 +1,44 @@
+<div class="header-container">
+  <div class="header-container__title">
+    {{this.title.getTitle()}}
+  </div>
+  <div class="header-container__icons action-icons">
+    <button class="action-icons__cart icon-cart non-btn-style hover-color-text" [routerLink]="'/cart'"></button>
+    <!--  <button class="action-icons__user  non-btn-style" [ngClass]="{'icon-user': userInfo.imageSRC =='' }"
+      [routerLink]="'/user-profile'">
+      <img *ngIf="userInfo.imageSRC !==''" [src]="userInfo.imageSRC" alt="user image">
+    </button> -->
+
+    <button class="action-icons__menu" (click)="activeMenu()">
+      <div class="bar1"></div>
+      <div class="bar2"></div>
+      <div class="bar3"></div>
+    </button>
+  </div>
+</div>
+
+<nav class="main-menu">
+  <div class="backdrop"></div>
+  <ul class="menu-list">
+    <li>
+      <button class="menu-button non-btn-style " [routerLink]="['/database/product-item/3']">
+        Database</button>
+    </li>
+    <li>
+      <button class="menu-button non-btn-style " [routerLink]="['/']"> Marketplace</button>
+    </li>
+    <li>
+      <button class="menu-button non-btn-style " [routerLink]="['/database']">Tanks</button>
+    </li>
+    <li>
+      <button class="menu-button non-btn-style " [routerLink]="['/database']"> Cart</button>
+    </li>
+    <li>
+      <button class="menu-button non-btn-style " [routerLink]="['/database']"> About as</button>
+    </li>
+    <li>
+      <button class="menu-button non-btn-style " [routerLink]="['/database']">Contacts</button>
+    </li>
+
+  </ul>
+</nav>

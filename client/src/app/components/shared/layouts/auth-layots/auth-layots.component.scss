@@ -1,0 +1,97 @@
+$md1:1440px;
+$md2:1024px;
+$md3:768px;
+$md4:430px;
+
+.sing-in{
+	
+	
+
+	&__container {
+		display: flex;
+		top: 0;
+		left: 0;
+		font-family: 'Aleo';
+		min-height: 700px;
+		
+		align-items: center;
+		flex-direction: column
+	}
+
+
+}
+
+.logo {
+display: flex;
+
+		width: 310px;
+		@media (min-width: $md4){
+		width: 450px;
+		}
+		height: 100px;
+		margin:  25px 25px 100px 25px;
+		align-items: center;
+		justify-content: center;
+
+	// .logo__image
+
+	&__image {
+		
+	background: url("../../image/logo.svg") 0 0/100% no-repeat; 
+		
+		height: 75px;
+		width: 75px;
+
+	}
+
+	// .logo__text
+
+	&__text {
+		height: inherit;
+		display: flex;
+		flex-direction: column;
+		justify-content: center;
+		align-items: center;
+		
+		margin:  0  0 0 10px;
+	
+	
+		font-style: normal;
+		font-weight: 700;
+		font-size: 20px;
+		
+		
+		color: #000000;
+		p{
+			margin: 5px 0;
+font-weight: 400;
+font-size: 14px;
+line-height: 17px;
+		}
+		
+	}
+	@media (max-width: 400px){
+		&__text {font-size: 16px;
+			
+			p{	font-size: 14px;}
+		}
+		
+	}
+	@media (max-width: 400px){
+		&__text {padding: 0 0 0 0;}
+	}
+	@media (min-width: $md3){
+		&__text {font-size: 26px;
+			
+			p{	font-size: 20px;}
+		}
+		
+	}
+	@media (min-width: $md1){
+		&__text {font-size: 30px;
+			
+			p{	font-size: 24px;}
+		}
+		
+	}
+}

@@ -1,0 +1,244 @@
+$md1:1440px;
+$md2:978px;
+$md3:770px;
+$md4:425px;
+
+.header-container {
+	display: flex;
+	overflow: hidden;
+			// .header-container__title
+	
+			&__title {
+				flex: 0 1 60%;
+				left: 0;
+				top: 0;
+				margin: 25px 0;
+				font-weight: 700;
+	font-size: 24px;
+	line-height: 29px;
+	display: flex;
+	align-items: center;
+			}
+	
+			// .header-container__icons
+	
+			&__icons {
+				flex: 0 1 40%;
+			}
+	}
+	.action-icons {
+		display: flex;
+		
+		justify-content: flex-end;
+		align-items: center;
+		
+			// .action-icons__cart
+	
+			&__cart {
+				display: flex;
+				justify-content: center;
+				align-items: center;
+				font-size: 40px;
+				font-weight: 700;
+				margin: 0 15px 0 0;
+				
+			}
+	
+			// .action-icons__user
+	
+			&__user {
+				cursor: pointer;
+				display: flex;
+				justify-content: center;
+				align-items: center;
+				font-size: 30px;
+				margin:  0 15px 0 0;
+					background: #B5B2B2;
+					
+					border-radius: 50%;
+					height: 40px;
+					width: 40px;
+					img{
+						border: 2px solid #000;
+						cursor: pointer;
+						border-radius: 50%;
+					height: 40px;
+					width: 40px;
+					@media (min-width: $md3){
+					&:hover{
+						border: 2px solid rgb(7, 3, 250);
+					}
+					}
+					}
+				
+			}
+			
+	
+			// .action-icons__menu
+	
+			&__menu {
+				right: 0;
+				display: inline-block;
+				cursor: pointer;
+				background: none;
+				border: none;
+				transition: 0.15s ease-in-out;
+				
+			}
+	}
+	//=========================================================================================================================================================================================================================================
+	//menu
+	.bar1, .bar2, .bar3 {
+		width: 30px;
+		height: 4px;
+		background-color: #333;
+		margin: 9px 0;
+		transition: 0.4s;
+	}
+	
+	.active .bar1 {
+		width: 40px;
+		-webkit-transform: rotate(-45deg) translate(-10px, 10px);
+		transform: rotate(-45deg) translate(-10px, 10px);
+	}
+	
+	.active .bar2 {opacity: 0;}
+	
+	.active .bar3 {
+		width: 40px;
+		-webkit-transform: rotate(45deg) translate(-8px, -8px);
+		transform: rotate(45deg) translate(-8px, -9px);
+	}
+	
+
+		//=========================================================================================================================================================================================================================================
+
+			
+		/* Nav position and opening class */
+		.main-menu{
+			position: absolute;
+			top: 0;
+			bottom: 0;
+			left: 0;
+			right: 0;
+			transition: 0.2s ease-in-out;
+			display: none;
+		}
+		.open-menu {
+			display: flex;
+			justify-content: center;
+			align-items: center;
+		}
+		
+		/* Backgroup position and animation */
+		.backdrop {
+			z-index: 50;
+			position: absolute;
+			width: 100%;
+			height: 100%;
+			background: rgba(0, 0, 0, 0.92);
+			cursor: pointer;
+			//animation: fadeIn 0.2s ease-in-out forwards;
+		}
+		@keyframes fadeIn {
+			from {
+				opacity: 0;
+			}
+			to {
+				opacity: 1;
+			}
+		}
+		
+		/* List item styling & animation */
+		.menu-list {
+			transition: all 0.3s ease 0s;
+			z-index: 100;
+			position: relative;
+			li{
+				list-style: none;
+			text-align: center;
+			margin-bottom: 30px;
+			animation: 0.4s ease-in-out animateList forwards;
+			}
+			li:last-child {
+				margin-bottom: 0;
+			}
+
+		}
+
+		@keyframes animateList {
+			from {
+				margin-top: -60px;
+				opacity: 0;
+			}
+			to {
+				margin-top: 0;
+				opacity: 1;
+			}
+		}
+		
+		/* Item links styles and hover effect*/
+		.menu-button {
+			z-index: 150;
+			font-family: Aleo;
+			text-decoration: none;
+			color: rgb(255, 255, 255);
+			font-size: 3em;
+			font-weight: 900;
+			opacity: 0.5;
+			text-transform: uppercase;
+			transition: all 1s ease 0s;
+			@media (min-width: $md3){
+			&:hover{
+				
+				color: #ee2fde;
+				opacity: 1;
+				scale: (1.4);
+				animation:  3s ease animateBtn ;
+		}
+		}
+		}
+	
+		@keyframes animateBtn{
+			0%{
+				
+				color: #e78787;
+				opacity: 0.8;
+			}
+			20%{
+				color: #ee2fde;
+				
+			}
+			30% {
+				color: #2f3bee;
+				opacity: 0.9;
+			}
+			40%{
+				color: #7106a3;
+				
+			}
+			50%{
+				color: #d1ee2f;
+				opacity: 1;
+			}
+			60%{
+				color: #2fee4f;
+			
+			}
+			70%{
+				color: #2feeee;
+				
+			}
+			80%{
+				color: #ee8b2f;
+				
+			}
+			90%{
+				color: #2fb8ee;
+				
+			}
+			100%{
+				color: #ee4c2f;
+				
+			}
+		}

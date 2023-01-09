@@ -1,0 +1,199 @@
+$md1:1440px;
+$md2:1024px;
+$md3:768px;
+$md4:430px;
+
+.login-forms {
+	display: flex;
+	left: 0;
+	top: 0;
+	justify-content: center;
+	align-items: center;
+	flex-direction: column;
+	// .account-forms__header
+	&._disactive{
+		display: none;
+	}
+	&__header {
+margin:  0 0 10px 0;
+font-weight: 700;
+font-size: 20px;
+text-align: center;
+
+color: #000000;
+p{
+	margin: 5px 0 0 0 ;
+	font-size: 14px;
+	font-weight: 400;
+	
+color: #818181;
+}
+@media (min-width: $md3){
+	font-size: 26px;
+		
+		p{	font-size: 20px;}
+	
+	
+}
+
+	}
+
+	// .login-forms__form
+
+	&__form {
+		display: flex;
+		justify-content: center;
+	align-items: center;
+	flex-direction: column;
+	margin: 15px;
+	.btn{
+		background: #000;
+		color: #fff;
+		margin: 10px;
+		height: 45px;
+		width: 300px;
+		border-radius: 10px;
+		
+		&:hover{
+		background: rgb(65, 64, 64);
+		}
+		
+		font-size: 14px;
+	
+		@media (min-width: $md4){
+		font-size: 26px;
+		width: 420px;
+		height: 55px;
+		}
+	}
+}
+
+.input {
+	margin: 10px;
+	height: 45px;
+	width: 300px;
+	border-radius: 10px;
+
+
+@media (min-width: $md4){
+font-size: 20px;
+width: 420px;
+height: 55px;
+}
+
+}
+}
+.have {
+	
+	// .have__account
+
+	&__account {
+		margin: 20px 10px;
+	width: inherit;
+		font-weight: 700;
+		font-size: 20px;
+		text-align: center;
+		
+		a{color: #000000;
+		text-decoration: none;
+		@media (min-width: $md3){
+		&:hover{
+				color: rgb(197, 21, 21);
+			
+		}
+		}
+	}
+
+		@media (min-width: $md3){
+		font-size: 26px;
+
+		}
+		
+			
+	}
+}
+.form-error{
+	font-size: 16px;
+	font-weight: 700;
+}
+
+.verification {
+	display: none;
+	margin: 20px 0 0 0 ;
+		width: 300px;
+		height: 400px;
+		
+		flex-direction: column;
+		align-items: center;
+		
+	@media (min-width: $md4){
+	width: 420px;
+	}
+	
+
+		&._active{
+			display: flex;
+		}
+
+	// .verification__image
+
+	&__image {
+		flex: 0 1 25%;
+		align-items: center;
+		background: url("../shared/image/verification.svg") 0 0/100% no-repeat ;
+	
+	
+		width:50px;
+		height: 50px;
+		@media (min-width: $md4 ){
+			width: 75px;
+			height: 75px;
+		}
+	
+
+	}
+
+	// .verification__text
+
+	&__text {
+		
+		flex: 0 1 50%;
+		
+		font-weight: 400;
+font-size: 16px;
+line-height: 30px;
+text-align: center;
+margin: 10px;
+color: #000000;
+p{
+	font-weight: 700;
+	font-size: 20px;
+}
+@media (max-width: $md4){
+	font-size: 12px;
+	p{
+		font-size: 16px;
+	}
+	}
+@media (min-width: $md4){
+	font-size: 14px;
+	p{
+		font-size: 20px;
+	}
+	}
+@media (min-width: $md3){
+	font-size: 20px;
+	p{
+		font-size: 26px;
+	}
+	}
+@media (min-width: $md2){
+font-size: 24px;
+p{
+	font-size: 30px;
+}
+}
+	}
+}
+
+

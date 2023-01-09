@@ -1,0 +1,123 @@
+
+$md1:1440px;
+$md2:978px;
+$md3:768px;
+$md4:450px;
+.menu {
+	display: flex;
+		justify-content: center;
+	flex-direction: column;
+	height: 300px;
+	width: 300px;
+	@media (min-width: $md4){
+		height: 400px;
+		width: 400px;
+	}
+
+	// .menu__title
+
+	&__title {
+		display:flex;
+		align-items: center;
+		justify-content: center;
+		font-family: Aleo;
+		font-weight: 400;
+		font-size: 24px;
+		margin: 10px 15px 20px;
+		span{
+			font-weight: 700;
+		}
+	}
+
+	// .menu__content
+
+	&__content {
+		display: flex;
+		align-items: center;
+		justify-content: center;
+		flex-direction: column;
+		height: 200px;
+		@media (min-width: $md4){
+			height: 300px;
+		}
+		width: inherit;
+	}
+
+	// .menu__form
+
+	&__form {
+		display: flex;
+		flex-direction: column;
+		align-items: center;
+		justify-content: center;
+	
+		width: 270px;
+		height: 60px;
+		margin: 0 0 20px 0;
+		
+		@media (min-width: $md4){
+			height: 80px;
+			width: 300px;
+		}
+	}
+
+	// .menu__form-label
+
+	&__form-label {	
+		font-weight: 400;
+		font-family: Aleo;
+		font-size: 18px;
+		line-height: 24px;
+	}
+
+	// .menu__input
+
+	&__input {	display: flex;
+		align-items: center;
+	
+		font-family: Aleo;
+		font-size: 20px;
+		line-height: 30px;
+		height: 80px;
+		text-align: center;
+		border: 2px solid rgb(114, 20, 168);
+		border-radius: 15px;
+		@media (min-width: $md4){
+			height: 50px;
+			
+		}
+	
+	}
+
+	// .menu__buttons
+
+	&__buttons {
+		display: flex;
+		justify-content: space-between;
+		align-items: center;
+		height: 50px;
+		width: inherit;
+	}
+
+	// .menu__actions-btn
+
+	&__actions-btn {
+		transition: all 0.5s ease 0s;
+		font-family: Aleo;
+		font-size: 16px;
+			line-height: 20px;
+		display: flex;
+		align-items: center;
+		justify-content: center;
+		width: 120px;
+		height: 50px;
+		@media (min-width: $md4){
+			font-size: 24px;
+			line-height: 30px;
+			width: 200px;
+			height: 50px;
+		}
+	}
+	
+}
+

@@ -1,0 +1,48 @@
+import { NgModule } from '@angular/core';
+import { RouterModule, Routes } from '@angular/router';
+
+import { DatabaseComponent } from './components/database/database.component';
+import { NewItemComponent } from './components/database/product-item/new-item/new-item.component';
+import { ProductItemComponent } from './components/database/product-item/product-item.component';
+import { LoginPageComponent } from './components/login-page/login-page.component';
+import { RegisterPageComponent } from './components/register-page/register-page.component';
+import { AuthGuard } from './components/shared/classes/auth.guard';
+import { AuthLayotsComponent } from './components/shared/layouts/auth-layots/auth-layots.component';
+import { SiteLayotsComponent } from './components/shared/layouts/site-layots/site-layots.component';
+import { ChangePasswordComponent } from './components/user-profile/change-password/change-password.component';
+import { UserProfileComponent } from './components/user-profile/user-profile.component';
+
+
+const routes: Routes = [
+  {
+    path: '', component: AuthLayotsComponent,
+    children: [
+      { path: '', redirectTo: '/login', pathMatch: 'full' },
+      { path: 'login', component: LoginPageComponent },
+      { path: 'register', component: RegisterPageComponent }
+
+
+    ]
+  },
+  {
+    path: '', component: SiteLayotsComponent, canActivate: [AuthGuard],
+    children: [
+      { path: 'database', component: DatabaseComponent, title: 'Database' },
+      { path: 'database/product-item/:idPosition', component: ProductItemComponent, title: 'Database' },
+      { path: 'database/product-item/newPos', component: NewItemComponent, title: 'Database' },
+
+      { path: 'user-profile', component: UserProfileComponent, title: 'User Profile' },
+      { path: 'user-profile/change-password', component: ChangePasswordComponent, title: 'Change password' },
+
+
+
+    ]
+
+  },
+];
+
+@NgModule({
+  imports: [RouterModule.forRoot(routes)],
+  exports: [RouterModule]
+})
+export class AppRoutingModule { }

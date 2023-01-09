@@ -1,0 +1,101 @@
+<div class="container">
+  <div class="user-container" [ngClass]="{'active-message': updateSuccess || passwordUncorrect}">
+
+
+    <div class="user-avatar">
+
+      <div *ngIf="userInfo.imageSRC =='';else image" class="user-avatar__image icon-user">
+      </div>
+      <ng-template #image><img [src]="userInfo.imageSRC" [alt]="user.username + ' '+'image'">
+      </ng-template>
+
+      <button class=" user-avatar__load-btn btn btn-blc hover-color" (click)="uploadUserImage()"> Upload a
+        profile picture</button>
+    </div>
+    <form class="user-form" [formGroup]="form">
+      <div class="user-info">
+        <div class="user-data">
+          <div class="item">
+            <div class="item__title">Username</div>
+            <input type="text" class="item__input" placeholder="Username" formControlName="username">
+            <span class="error" *ngIf="form.get('username')?.invalid && form.get('username')?.touched">
+              <p *ngIf="form.get('username')?.errors?.['required']">Name cannot be empty
+              </p>
+
+            </span>
+          </div>
+          <div class="item">
+            <div class="item__title">Email</div>
+            <input type="email" class="item__input" placeholder="Email" formControlName="email">
+            <span class="error" *ngIf="form.get('email')?.invalid && form.get('email')?.touched">
+              <p *ngIf="form.get('email')?.errors?.['required']">Email cannot be empty
+              </p>
+              <p *ngIf="form.get('email')?.errors?.['email']">Email incorrect! Enter correct email like this
+                Example@Example.com
+              </p>
+            </span>
+          </div>
+        </div>
+        <div class="user-address">
+          <div class="item " [ngClass]="{'active-list': focus==true}">
+            <div class="item__title">Country</div>
+            <div class="inputs  icon-arrow">
+              <input list="countries" (focus)="focusCheck()" type="text" class="item__input select-list"
+                formControlName="country" placeholder="Country">
+
+              <datalist id="countries" class="countries">
+                <option class="option" value="Kharkiv">
+                <option class="option" value="kyiv">
+                <option class="option" value="Kherson">
+                <option class="option" value="Broklin">
+                <option class="option" value="Zinkiv">
+              </datalist>
+            </div>
+
+
+          </div>
+          <div class="item">
+            <div class="item__title">Address</div>
+            <input type="text" class="item__input" formControlName="address" placeholder="Address">
+          </div>
+          <div class="item">
+            <div class="item__title">City</div>
+            <input type="text" class="item__input" formControlName="city" placeholder="City">
+          </div>
+        </div>
+        <div class="user-phone">
+          <div class="item">
+            <div class="item__title">Phone</div>
+            <input type="tel" class="item__input" formControlName="phone" placeholder="Phone">
+            <span class="error" *ngIf="this.form.get('phone')?.invalid&& this.form.get('phone')?.touched">
+              <p>Phone number incorrect</p>
+            </span>
+          </div>
+        </div>
+
+      </div>
+
+    </form>
+    <div class="action-btn">
+      <div class="action-btn__log-out">
+        <button type="button" class="action-btn__log-out-btn non-btn-style" (click)="logout($event)">Log out</button>
+      </div>
+      <button type="button" (click)="checkPassword('password change')"
+        class="action-btn__chng-pswd btn btn-wht hover-color">Change
+        password</button>
+      <button type="submit" (click)="onSubmit()" class="action-btn__save-ch btn btn-blc hover-color">Save
+        changes</button>
+    </div>
+
+
+  </div>
+  <div *ngIf="updateSuccess || passwordUncorrect" class="message">
+    <div *ngIf="updateSuccess" class="message__text">
+      The User data was successfully updated
+    </div>
+    <div *ngIf="passwordUncorrect" class="message__text">
+      Password uncorrect!
+    </div>
+  </div>
+
+</div>

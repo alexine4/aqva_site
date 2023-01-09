@@ -1,0 +1,25 @@
+<div class="sing-in-forms">
+  <div class="sing-in-forms__header">Create an account <p> to access more features of the platform</p>
+  </div>
+  <form [formGroup]="signInForm" (ngSubmit)="submitSignIn()" class="sing-in-forms__form">
+
+    <input formControlName="login" type="text" id="typeEmailOrUsername" placeholder="Email or Username" class="input" />
+    <p *ngIf="this.signInForm.get('login')?.invalid && this.signInForm.get('login')?.touched ">
+      <small class="form-error">
+        The form must be filled out!!! Please enter your Email or Username
+      </small>
+    </p>
+    <input formControlName="password" type="password" id="typePassword" placeholder="Password" class="input" />
+    <p *ngIf="this.signInForm.get('password')?.invalid && this.signInForm.get('password')?.touched ">
+      <small class="form-error">Invalid format!! The password must contain minimum eight characters, at least one
+        uppercase letter, one lowercase letter and one number </small>
+    </p>
+    <button [disabled]="signInForm.invalid" type="submit" class="form__btn btn">Sign in</button>
+
+  </form>
+  <button class="action-btn non-btn-style">Forgot password?</button>
+  <button [routerLink]="'/register'" class="action-btn non-btn-style"><span>You don't have an account?</span>
+    Register </button>
+
+
+</div>

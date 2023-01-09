@@ -1,0 +1,49 @@
+<div *ngIf="data.action === 'new'" class="menu">
+  <div mat-dialog-title class="menu__title">If you wont create new {{data.type}} you need enter NAME and confirm
+  </div>
+  <div mat-dialog-content class="menu__content">
+    <div class="menu__form" appearance="fill">
+      <mat-label class="menu__form-label">Enter name of new {{data.type}}</mat-label>
+      <input type="text" class="menu__input" matInput [(ngModel)]="data.name">
+    </div>
+
+  </div>
+  <div *ngIf="data.type == 'Position'" mat-dialog-content class="menu__content">
+    <div class="menu__form" appearance="fill">
+      <mat-label class="menu__form-label">Enter description of new {{data.type}}</mat-label>
+      <input type="text" class="menu__input" matInput [(ngModel)]="data.description">
+    </div>
+
+  </div>
+  <div mat-dialog-actions class="menu__buttons">
+    <button class="menu__actions-btn non-btn-style hover-color" mat-button (click)="onNoClick()">Cancel</button>
+    <button class="menu__actions-btn non-btn-style hover-color" [mat-dialog-close]="data" cdkFocusInitial
+      mat-button>Confirm and create</button>
+  </div>
+</div>
+
+
+
+<div *ngIf="data.action === 'update'" class="menu">
+  <div mat-dialog-title class="menu__title">You wont update {{data.type + ': '+ data.name}} ?
+  </div>
+  <div mat-dialog-content class="menu__content">
+    <div class="menu__form" appearance="fill">
+      <mat-label class="menu__form-label">Enter new name {{data.type + ': '+ data.name}}</mat-label>
+      <input type="text" class="menu__input" matInput [(ngModel)]="data.name">
+    </div>
+
+  </div>
+  <div *ngIf="data.type == 'Position'" mat-dialog-content class="menu__content">
+    <div class="menu__form" appearance="fill">
+      <mat-label class="menu__form-label">Enter new description {{data.type + ': '+ data.name}}</mat-label>
+      <input type="text" class="menu__input" matInput [(ngModel)]="data.description">
+    </div>
+
+  </div>
+  <div mat-dialog-actions class="menu__buttons">
+    <button class="menu__actions-btn non-btn-style hover-color" mat-button (click)="onNoClick()">Cancel</button>
+    <button class="menu__actions-btn non-btn-style hover-color" [mat-dialog-close]="data" cdkFocusInitial
+      mat-button>Confirm and update</button>
+  </div>
+</div>

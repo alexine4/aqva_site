@@ -1,0 +1,49 @@
+<form [formGroup]="logInForm" (ngSubmit)="submitLogIn()" class="login-forms">
+  <div class="login-forms__header">Create an account <p> to access more features of the
+      platform</p>
+  </div>
+  <div class="login-forms__form ">
+    <input formControlName="email" type="email" id="typeEmail" placeholder="Your email" class="input"
+      (keyup.enter)="checkEmail(this.logInForm.get('email')?.value)"
+      (blur)="checkEmail(this.logInForm.get('email')?.value)" />
+    <p *ngIf="this.logInForm.get('email')?.invalid && this.logInForm.get('email')?.touched ">
+      <small class="form-error">
+        Invalid format!!! Example user@user.com
+      </small>
+    </p>
+    <p *ngIf="emailExists">
+      <small class="form-error">
+        Email already exist! Please enter other email
+      </small>
+    </p>
+    <input formControlName="username" type="text" id="typeUsername" placeholder="Username" class="input"
+      (keyup.enter)="checkUsername(this.logInForm.get('username')?.value)"
+      (blur)="checkUsername(this.logInForm.get('username')?.value)" />
+    <p *ngIf="this.logInForm.get('username')?.invalid && this.logInForm.get('username')?.touched ">
+      <small class="form-error">
+        The form must be filled out!!! Please enter your Email or Username
+      </small>
+    </p>
+    <p *ngIf="usernameExists">
+      <small class="form-error">
+        Username already exist! Please enter other email
+      </small>
+    </p>
+    <button [disabled]="logInForm.invalid || logInForm.disabled || emailExists || usernameExists" (click)="active()"
+      class="btn create-account" type="submit">Create
+      account</button>
+  </div>
+  <div class="have__account">
+    <a routerLink="/">I already have an account</a>
+  </div>
+</form>
+
+<div class="verification">
+  <div class="verification__image"></div>
+  <div class="verification__text">
+    <p>We’ve sent you a verification link to your email address </p>
+    Please confirm your email address to finish creating your account
+  </div>
+</div>
+<!-- <router-outlet *ngIf="nextStep"></router-outlet> -->
+<app-password-create [email]="email" [username]="username" *ngIf="nextStep"></app-password-create>
