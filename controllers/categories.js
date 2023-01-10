@@ -26,15 +26,11 @@ module.exports.remove = async(req,res)=>{
 			await Categories.remove(req.params.idCategories)
 			.then(
 				()=>{
-					res.status(200).json({
-						message:"The category was deleted and all types bellonging to it"
-					})
+					res.status(200).json(true)
 				}
 			)
 		}else{
-			res.status(404).json({
-				message:"The category with this id doesn`t not exist"
-			})
+			res.status(404).json(false)
 		}
 	} catch (error) {
 		errorHandler(res,error)

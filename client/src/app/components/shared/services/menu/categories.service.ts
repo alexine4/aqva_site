@@ -23,6 +23,9 @@ export class CategoriesService {
   update(category: Category): Observable<Boolean> {
     return this.http.patch<Boolean>(`/api/categories/${category.idCategories}`, category)
   }
+  delete(idCategories: Number): Observable<Boolean> {
+    return this.http.delete<Boolean>(`/api/categories/${idCategories}`)
+  }
 
 
 

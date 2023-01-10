@@ -24,7 +24,7 @@ export class UserProfileComponent implements OnInit {
   timeout = 5000
   updateSuccess = false
   passwordUncorrect = false
-
+  userDataUncorrect = false
 
   constructor(
     public dialog: MatDialog,
@@ -78,11 +78,12 @@ export class UserProfileComponent implements OnInit {
       this.user.username = this.form.value.username
 
       this.userService.updateUser(this.user).subscribe(
-        () => {
-
-          this.updateMessage()
+        update => {
+          this.updateMessage(update)
           this.form.enable()
           this.updateUserInfo()
+
+
         }
       )
 
@@ -108,7 +109,7 @@ export class UserProfileComponent implements OnInit {
         () => {
           this.form.enable()
           if (!this.updateSuccess) {
-            this.updateMessage()
+            this.updateMessage(true)
           }
         }
       )
@@ -117,11 +118,19 @@ export class UserProfileComponent implements OnInit {
   }
 
   // update message function
-  updateMessage() {
-    this.updateSuccess = true
-    setTimeout(() => {
-      this.updateSuccess = false
-    }, this.timeout);
+  updateMessage(status: Boolean) {
+    if (status) {
+      this.updateSuccess = true
+      setTimeout(() => {
+        this.updateSuccess = false
+      }, this.timeout);
+    } else {
+      this.userDataUncorrect = true
+      setTimeout(() => {
+        this.userDataUncorrect = false
+      }, this.timeout);
+    }
+
   }
 
   //open upload image
@@ -138,7 +147,7 @@ export class UserProfileComponent implements OnInit {
       result => {
 
         if (result) {
-          this.updateMessage()
+          this.updateMessage(result)
           setTimeout(() => {
             window.location.reload()
           }, this.timeout + 50);

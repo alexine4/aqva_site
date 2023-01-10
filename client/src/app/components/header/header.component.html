@@ -4,10 +4,9 @@
   </div>
   <div class="header-container__icons action-icons">
     <button class="action-icons__cart icon-cart non-btn-style hover-color-text" [routerLink]="'/cart'"></button>
-    <!--  <button class="action-icons__user  non-btn-style" [ngClass]="{'icon-user': userInfo.imageSRC =='' }"
-      [routerLink]="'/user-profile'">
-      <img *ngIf="userInfo.imageSRC !==''" [src]="userInfo.imageSRC" alt="user image">
-    </button> -->
+    <button class="action-icons__user  non-btn-style" [routerLink]="'/user-profile'">
+      <img *ngIf="userInfo.imageSRC !=='' && userInfo.imageSRC !==null" [src]="userInfo.imageSRC" alt="user image">
+    </button>
 
     <button class="action-icons__menu" (click)="activeMenu()">
       <div class="bar1"></div>

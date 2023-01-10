@@ -9,7 +9,14 @@
         The form must be filled out!!! Please enter your Email or Username
       </small>
     </p>
-    <input formControlName="password" type="password" id="typePassword" placeholder="Password" class="input" />
+    <div class="field">
+      <input formControlName="password" type="password" id="typePassword" placeholder="Password"
+        class="input password" />
+      <button type="button" (click)="showHidePassword(1);showPassword2 = !showPassword2 " class="non-btn-style"
+        [ngClass]="showPassword2 ? 'show-password': 'hide-password'"></button>
+    </div>
+
+
     <p *ngIf="this.signInForm.get('password')?.invalid && this.signInForm.get('password')?.touched ">
       <small class="form-error">Invalid format!! The password must contain minimum eight characters, at least one
         uppercase letter, one lowercase letter and one number </small>

@@ -27,8 +27,6 @@ export class HeaderComponent extends TitleStrategy implements OnInit {
 
     this.userService.fetchUserInfo().subscribe(
       UserInfo => {
-        console.log(UserInfo);
-
         if (UserInfo !== null) {
           this.userInfo = UserInfo
         }

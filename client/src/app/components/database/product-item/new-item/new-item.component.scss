@@ -4,7 +4,8 @@ $md3:768px;
 $md4:450px;
 .menu {
 	display: flex;
-		justify-content: center;
+	align-items: center;
+		justify-content: space-between;
 	flex-direction: column;
 	height: 300px;
 	width: 300px;

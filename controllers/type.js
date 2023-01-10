@@ -26,15 +26,11 @@ module.exports.remove = async(req,res)=>{
 			await Type.remove(req.params.idType)
 			.then(
 				()=>{
-					res.status(200).json({
-						message:"The type was deleted and all genus bellonging to it"
-					})
+					res.status(200).json(true)
 				}
 			)
 		}else{
-			res.status(404).json({
-				message:"The type with this id doesn`t not exist"
-			})
+			res.status(404).json(false)
 		}
 	} catch (error) {
 		errorHandler(res,error)

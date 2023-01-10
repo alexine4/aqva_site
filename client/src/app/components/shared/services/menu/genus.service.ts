@@ -24,7 +24,10 @@ export class GenusService {
     return this.http.post<Boolean>('/api/genus/add', genus)
   }
   update(genus: Genus): Observable<Boolean> {
-    return this.http.patch<Boolean>(`/api/categories/${genus.idGenus}`, genus)
+    return this.http.patch<Boolean>(`/api/menu/genus/${genus.idGenus}`, genus)
+  }
+  delete(idGenus: Number): Observable<Boolean> {
+    return this.http.delete<Boolean>(`/api/menu/genus/${idGenus}`)
   }
 }
 

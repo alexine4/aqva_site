@@ -38,6 +38,7 @@ import { ChangePasswordComponent } from './components/user-profile/change-passwo
 import { AddNewCategoryComponent } from './components/database/menu/add-new-category/add-new-category.component';
 
 
+
 @NgModule({
   declarations: [
     AppComponent,
@@ -62,6 +63,7 @@ import { AddNewCategoryComponent } from './components/database/menu/add-new-cate
     ChangePasswordComponent,
 
     AddNewCategoryComponent
+
   ],
   imports: [
     BrowserModule,

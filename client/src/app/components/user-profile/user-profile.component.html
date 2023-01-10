@@ -1,5 +1,5 @@
 <div class="container">
-  <div class="user-container" [ngClass]="{'active-message': updateSuccess || passwordUncorrect}">
+  <div class="user-container" [ngClass]="{'active-message': updateSuccess || passwordUncorrect ||userDataUncorrect}">
 
 
     <div class="user-avatar">
@@ -89,12 +89,15 @@
 
 
   </div>
-  <div *ngIf="updateSuccess || passwordUncorrect" class="message">
+  <div *ngIf="updateSuccess || passwordUncorrect || userDataUncorrect" class="message">
     <div *ngIf="updateSuccess" class="message__text">
       The User data was successfully updated
     </div>
     <div *ngIf="passwordUncorrect" class="message__text">
       Password uncorrect!
+    </div>
+    <div *ngIf="userDataUncorrect" class="message__text">
+      Email or Username already exist`s! Update unsuccess, please repeat
     </div>
   </div>
 

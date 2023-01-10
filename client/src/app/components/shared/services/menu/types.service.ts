@@ -23,6 +23,9 @@ export class TypesService {
     return this.http.post<Boolean>('/api/menu/types/add', type)
   }
   update(type: Type): Observable<Boolean> {
-    return this.http.patch<Boolean>(`/api/categories/${type.idType}`, type)
+    return this.http.patch<Boolean>(`/api/menu/types/${type.idType}`, type)
+  }
+  delete(idType: Number): Observable<Boolean> {
+    return this.http.delete<Boolean>(`/api/menu/types/${idType}`)
   }
 }

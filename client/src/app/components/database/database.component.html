@@ -77,7 +77,8 @@
                   <div class="active-button">
                     <button (click)="reductItem($event,category.idCategories,category.name,'','Category')"
                       class="update-icon non-btn-style"></button>
-                    <button class="delete-icon non-btn-style"></button>
+                    <button (click)="deleteItem($event,category.idCategories,category.name,'Category')"
+                      class="delete-icon non-btn-style"></button>
                   </div>
                   {{category.name | titlecase}}
                 </div>
@@ -86,7 +87,7 @@
 
             </div>
 
-            <button (click)="addNewCategory()" type="button"
+            <button id="addNew" (click)="addNewCategory()" type="button"
               class="categories-list__new-element hover-color icon-plus non-btn-style">
               Add new category
             </button>
@@ -104,10 +105,20 @@
             </div>
             <div class="categories-list__list " *ngIf="types.length !==0 ; else empty">
               <button *ngFor="let type of types" class="category hover-color icon-arrow non-btn-style"
-                (click)="thirdLevel(type.idType, type.name)">{{type.name | titlecase}}</button>
+                (click)="thirdLevel(type.idType, type.name)">
+                <div class="button-functional">
+                  <div class="active-button">
+                    <button (click)="reductItem($event,type.idType,type.name,'','Type')"
+                      class="update-icon non-btn-style"></button>
+                    <button (click)="deleteItem($event,type.idType,type.name,'Type')"
+                      class="delete-icon non-btn-style"></button>
+                  </div>
+                  {{type.name | titlecase}}
+                </div>
+              </button>
 
             </div>
-            <button (click)="addNewType()" type="button"
+            <button id="addNew" (click)="addNewType()" type="button"
               class="categories-list__new-element hover-color icon-plus non-btn-style">
               Add new type
             </button>
@@ -122,10 +133,21 @@
             </div>
             <div class="categories-list__list " *ngIf="genusies.length !==0 ; else empty">
               <button *ngFor="let genus of genusies" class="category hover-color icon-arrow non-btn-style"
-                (click)="forsLevel(genus.idGenus, genus.name); ">{{genus.name | titlecase}}</button>
+                (click)="forsLevel(genus.idGenus, genus.name); ">
+
+                <div class="button-functional">
+                  <div class="active-button">
+                    <button (click)="reductItem($event,genus.idGenus,genus.name,'','Genus')"
+                      class="update-icon non-btn-style"></button>
+                    <button (click)="deleteItem($event,genus.idGenus,genus.name,'Genus')"
+                      class="delete-icon non-btn-style"></button>
+                  </div>
+                  {{genus.name | titlecase}}
+                </div>
+              </button>
 
             </div>
-            <button (click)="addNewGenus()" type="button"
+            <button id="addNew" (click)="addNewGenus()" type="button"
               class="categories-list__new-element hover-color icon-plus non-btn-style">
               Add new genus
             </button>
@@ -139,11 +161,22 @@
                 results</span>
             </div>
             <div class="categories-list__list " *ngIf="positions.length !==0 ; else empty">
-              <a *ngFor="let position of positions" [routerLink]="['/database/product-item/', position.idPosition]"
-                class="category hover-color icon-arrow non-link-style">{{position.name | titlecase}}</a>
+              <button *ngFor="let position of positions" [routerLink]="['/database/product-item/', position.idPosition]"
+                class="category hover-color icon-arrow non-btn-style">
+                <div class="button-functional">
+                  <div class="active-button">
+                    <button
+                      (click)="reductItem($event,position.idPosition,position.name, position.description,'Position')"
+                      class="update-icon non-btn-style"></button>
+                    <button (click)="deleteItem($event,position.idPosition,position.name,'Position')"
+                      class="delete-icon non-btn-style"></button>
+                  </div>
+                  {{position.name | titlecase}}
+                </div>
+              </button>
 
             </div>
-            <button (click)="addNewPosition()" type="button"
+            <button id="addNew" (click)="addNewPosition()" type="button"
               class="categories-list__new-element hover-color icon-plus non-btn-style">
               Add new position
             </button>

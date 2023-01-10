@@ -13,6 +13,7 @@ export class LoginPageComponent implements OnInit, OnDestroy {
 
   signInForm!: FormGroup
   aSub!: Subscription
+  showPassword2 = false
   constructor(private auth: AuthService,
     private router: Router,
     private route: ActivatedRoute
@@ -54,7 +55,21 @@ export class LoginPageComponent implements OnInit, OnDestroy {
     if (this.aSub) {
       this.aSub.unsubscribe()
     }
+  }
+  showHidePassword(number: number) {
 
+    if (number === 1) {
+      const input = document.getElementById('typePassword')
+      if (input) {
+        if (input.getAttribute('type') === 'password') {
+          input.removeAttribute('type');
+          input.setAttribute('type', 'text');
+        } else {
+          input.removeAttribute('type');
+          input.setAttribute('type', 'password');
+        }
+      }
+    }
   }
 
 }

@@ -121,3 +121,40 @@ span{
 font-weight: 400;
 }
 }
+
+.password{
+	position:relative;
+	right: 5px;
+	top: 0;
+}
+
+.field{
+	width: 530px;
+	@media (max-width: $md4){
+	width: 340px;
+	}
+	left: 15px;
+	display: flex;
+	align-items: center;
+	justify-content: center;
+	position: relative;
+}
+.show-password{
+	background: url("../shared/image/eye.svg") 0 0 /100% no-repeat;
+		position: relative;
+		right: 50px;
+		top: 0px;
+		height: 25px;
+		width: 25px;
+
+}
+
+.hide-password{
+	background: url("../shared/image/eye-blocked.svg") 0 0 /100% no-repeat;
+	position: relative;
+	right: 50px;
+	top: 0px;
+	height: 25px;
+	width: 25px;
+
+}

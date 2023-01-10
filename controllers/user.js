@@ -33,10 +33,60 @@ module.exports.getInfoByActualUser = async (req,res)=>{
 
 module.exports.update= async(req,res)=>{
 	try {
+		await User.findByIds(req.user.idUser).then(
+			user=>{
+				
+				if (user.dataValues.username !== req.body.username && user.dataValues.email !== req.body.email ) {
+					User.findOne('email',req.body.email).then(
+						result=>{
+							if (result == true) {
+								User.findOne('username',req.body.username).then(
+									result1=>{
+										if (result1 == true) {
+											User.update(req.user.idUser,req.body.username,req.body.email).then(()=>{
+												res.status(200).json(true)
+											})
+										}else{
+												res.status(200).json(false)
+												}
+												}
+											)
+							}else{
+								res.status(200).json(false)
+							}
+						}
+					)
+				
+				} else if(user.dataValues.username === req.body.username && user.dataValues.email !== req.body.email){
+					User.findOne('email',req.body.email).then(
+						result=>{
+							if (result == true) {
+								User.update(req.user.idUser,user.dataValues.username,req.body.email).then(()=>{
+									res.status(200).json(true)
+								})
+							}else{
+								res.status(200).json(false)
+							}
+							
+						})
+				
+				}else if(user.dataValues.username !== req.body.username && user.dataValues.email === req.body.email){
+					User.findOne('username',req.body.username).then(
+						result=>{
+							if (result == true) {
+								User.update(req.user.idUser,req.body.username,user.dataValues.email).then(()=>{
+									res.status(200).json(true)
+								})
+							}else{
+								res.status(200).json(false)
+							}
+							
+						})
+				}
+			
+			}
+		)
 		
-		await User.update(req.user.idUser,req.body.username,req.body.email).then(()=>{
-			res.status(200).json(true)
-		})
 				
 	} catch (error) {
 		errorHandler(res,error)

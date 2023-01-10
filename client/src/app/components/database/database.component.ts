@@ -10,6 +10,7 @@ import { GenusService } from '../shared/services/menu/genus.service';
 import { PositionsService } from '../shared/services/menu/positions.service';
 import { TypesService } from '../shared/services/menu/types.service';
 import { AddNewCategoryComponent } from './menu/add-new-category/add-new-category.component';
+import { NewItemComponent } from './product-item/new-item/new-item.component';
 
 
 @Component({
@@ -95,6 +96,7 @@ export class DatabaseComponent implements OnInit {
     const menu = document.getElementById('menu')
     const checkActive = document.querySelector('.hide')
     const list = document.getElementById('list')
+    const buttonAdd = document.getElementById('addNew')
 
     const quantityElements = document.querySelectorAll('.category')
     const firstLayer = document.querySelector('.first-layer')
@@ -110,7 +112,7 @@ export class DatabaseComponent implements OnInit {
         var size = 175
 
       } else {
-        var size = 42 * quantityElements.length + 85 + 50
+        var size = 42 * quantityElements.length + 135 + 80
       }
     } else if (secondLayer || thirdLayer || forsLayer) {
       if (quantityElements.length === 0) {
@@ -124,12 +126,20 @@ export class DatabaseComponent implements OnInit {
       menu.style.maxHeight = `45px`
       menu.style.top = `0px`
 
+
+
+
     } else if (menu && !checkActive && list) {
 
       if (quantityElements.length > 12) {
         menu.style.maxHeight = `600px`
-        menu.style.top = `-558px`
+        menu.style.top = `0px`
         list.style.overflowY = `scroll`
+        list.style.overflowX = `hidden`
+        if (buttonAdd) {
+          buttonAdd.style.width = `${quantityElements[1].clientWidth}px`;
+        }
+
 
       } else {
         menu.style.top = `${0}px`
@@ -538,8 +548,173 @@ export class DatabaseComponent implements OnInit {
         }
       )
     }
+    // reduct genus
+    else if (item === 'Genus') {
+      const dialogRef = this.dialog.open(AddNewCategoryComponent, {
+
+        data: {
+          action: 'update',
+          type: 'Genus',
+          name: name
+        }
+      })
+
+      dialogRef.afterClosed().subscribe(
+        result => {
+          if (idItem !== undefined && this.activeType.idType) {
+            const genus = {
+              idType: this.activeType.idType,
+              idGenus: idItem,
+              name: result.name
+            }
+            this.genusService.update(genus).subscribe(
+              status => {
+                if (status) {
+                  this.genusies$ = this.genusService.fetchByType(genus.idType)
+                }
+              }
+            )
+          }
+        }
+      )
+    }
+    // reduct position
+    else if (item === 'Position') {
+      const dialogRef = this.dialog.open(AddNewCategoryComponent, {
+
+        data: {
+          action: 'update',
+          type: 'Position',
+          name: name,
+          description
+        }
+      })
+
+      dialogRef.afterClosed().subscribe(
+        result => {
+          if (idItem !== undefined && this.activeGenus.idGenus) {
+            const positiion = {
+              idPosition: idItem,
+              idGenus: this.activeGenus.idGenus,
+              name: result.name,
+              description: result.description
+            }
+            this.positionService.update(positiion).subscribe(
+              status => {
+                if (status) {
+                  this.positions$ = this.positionService.fetchByGenus(positiion.idGenus)
+                }
+              }
+            )
+          }
+        }
+      )
+    }
 
   }
+
+  deleteItem(event: Event, idItem: number | undefined, name: string | undefined, item: string) {
+    event.stopPropagation()
+
+    // delete category
+    if (item === 'Category') {
+      const dialogRef = this.dialog.open(NewItemComponent, {
+
+        data: {
+          delete: true,
+          type: 'Category',
+          name: name
+        }
+      })
+      dialogRef.afterClosed().subscribe(
+        result => {
+          if (result !== undefined && idItem) {
+            this.categoriesServices.delete(idItem).subscribe(
+              deleteStatus => {
+                if (deleteStatus) {
+                  this.categories$ = this.categoriesServices.fetch()
+                }
+              }
+            )
+          }
+
+        })
+    }
+    // delete type
+    else if (item === 'Type') {
+      const dialogRef = this.dialog.open(NewItemComponent, {
+
+        data: {
+          delete: true,
+          type: 'Type',
+          name: name
+        }
+      })
+      dialogRef.afterClosed().subscribe(
+        result => {
+          if (result !== undefined && idItem) {
+            this.typesService.delete(idItem).subscribe(
+              deleteStatus => {
+                if (deleteStatus && this.activeCategory.idCategories) {
+                  this.types$ = this.typesService.fetchByCategory(this.activeCategory.idCategories)
+                }
+              }
+            )
+          }
+
+        })
+    }
+    // delete genus
+    else if (item === 'Genus') {
+      const dialogRef = this.dialog.open(NewItemComponent, {
+
+        data: {
+          delete: true,
+          type: 'Genus',
+          name: name
+        }
+      })
+      dialogRef.afterClosed().subscribe(
+        result => {
+          if (result !== undefined && idItem) {
+            this.genusService.delete(idItem).subscribe(
+              deleteStatus => {
+                if (deleteStatus && this.activeType.idType) {
+                  this.genusies$ = this.genusService.fetchByType(this.activeType.idType)
+                }
+              }
+            )
+          }
+
+        })
+    }
+    // delete position
+
+    else if (item === 'Position') {
+      const dialogRef = this.dialog.open(NewItemComponent, {
+
+        data: {
+          delete: true,
+          type: 'Position',
+          name: name
+        }
+      })
+      dialogRef.afterClosed().subscribe(
+        result => {
+          if (result !== undefined && idItem) {
+            this.positionService.delete(idItem).subscribe(
+              deleteStatus => {
+                if (deleteStatus && this.activeGenus.idGenus) {
+                  this.positions$ = this.positionService.fetchByGenus(this.activeGenus.idGenus)
+                }
+              }
+            )
+          }
+
+        })
+    }
+  }
+
 
 
 }
