@@ -5,6 +5,9 @@ const categories = require('../models/categories')
 const position = require('../models/position')
 const image = require('../models/image')
 const userInfo = require('../models/userInfo')
+const order = require('../models/order')
+const orderList = require('../models/orderList')
+const company = require('../models/companies')
 
 module.exports.initialilazationAll= ()=>{
 	user.initialization()
@@ -14,5 +17,8 @@ module.exports.initialilazationAll= ()=>{
 	position.initialization()
 	image.initialization()
 	userInfo.initialization()
+	order.initialization()
+	orderList.initialization()
+	company.initialization()
 }
 	

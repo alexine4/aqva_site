@@ -118,7 +118,7 @@ export class DatabaseComponent implements OnInit {
       if (quantityElements.length === 0) {
         var size = 154 + 50
       } else {
-        var size = 42 * quantityElements.length + 120 + 60
+        var size = 50 * quantityElements.length + 136 + 60
       }
     }
 
@@ -131,7 +131,7 @@ export class DatabaseComponent implements OnInit {
 
     } else if (menu && !checkActive && list) {
 
-      if (quantityElements.length > 12) {
+      if (quantityElements.length > 10) {
         menu.style.maxHeight = `600px`
         menu.style.top = `0px`
         list.style.overflowY = `scroll`
@@ -397,14 +397,13 @@ export class DatabaseComponent implements OnInit {
 
     dialogRef.afterClosed().subscribe(
       result => {
-        console.log(result);
-        console.log(this.activeGenus.idGenus);
-
         if (this.activeGenus.idGenus) {
           const position = {
             idGenus: this.activeGenus.idGenus,
             name: result.name,
-            description: result.description
+            description: result.description,
+            amount: 0,
+            company: ''
           }
           this.positionService.create(position).subscribe(
             status => {
@@ -439,7 +438,7 @@ export class DatabaseComponent implements OnInit {
 
 
         for (let index = 0; index < positions.length; index++) {
-          let id = positions[index].idPosition?.toString()
+          let id = positions[index].idPosition
           if (id !== undefined) {
             this.imagePosService.getByPosition(id).subscribe(
               images => {
@@ -597,7 +596,9 @@ export class DatabaseComponent implements OnInit {
               idPosition: idItem,
               idGenus: this.activeGenus.idGenus,
               name: result.name,
-              description: result.description
+              description: result.description,
+              amount: 0,
+              company: ''
             }
             this.positionService.update(positiion).subscribe(
               status => {

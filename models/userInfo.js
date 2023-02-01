@@ -101,7 +101,7 @@ module.exports.updateImage = async (idUser,imageSRC)=>{
 }
 
 
-module.exports.findByIds = async function (idUser){
+module.exports.findById = async function (idUser){
 	const userInfo = await UserInfo.findOne({
 		where: {
 			 idUser

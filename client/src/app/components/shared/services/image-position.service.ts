@@ -29,8 +29,11 @@ export class ImagePositionService {
   }
 
 
-  getByPosition(idPosition: string): Observable<Image[]> {
+  getByPosition(idPosition: number): Observable<Image[]> {
     return this.http.get<Image[]>(`/api/position/images/${idPosition}`)
+  }
+  getOneByPosition(idPosition: number): Observable<Image> {
+    return this.http.get<Image>(`/api/position/image-by-pos/${idPosition}`)
   }
 
 }

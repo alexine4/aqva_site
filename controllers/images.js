@@ -43,9 +43,33 @@ module.exports.delete = async(req,res)=>{
 			if(images ===false){
 				res.status(200).json([])
 			}else{
-				console.log(images);
+				
 				res.status(200).json(images)
 			}
+		
+		} catch (error) {
+			errorHandler(res,error)
+		}
+			
+	}
+	module.exports.getOneByPosition = async(req,res)=>{
+		try {
+			
+			await Image.getOneByPosition(req.params.idPosition).then(
+				image=>{
+					if(image){
+						res.status(200).json(image)
+					}else{
+						
+						res.status(200).json({
+							idPosition: 0,
+							imageSRC: ' ',
+							idUser: 0
+						 })
+					}
+				}
+			)
+			
 		
 		} catch (error) {
 			errorHandler(res,error)

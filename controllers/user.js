@@ -18,7 +18,20 @@ module.exports.getActual = async (req,res)=>{
 
 module.exports.getInfoByActualUser = async (req,res)=>{
 	try {
-		await UserInfo.findByIds(req.user.idUser).then((user)=>{
+		await UserInfo.findById(req.user.idUser).then((user)=>{
+		
+				res.status(200).json(user)
+						
+		})
+	} catch (error) {
+		errorHandler(res,error)
+	}
+		
+
+}
+module.exports.getInfoByUser = async (req,res)=>{
+	try {
+		await UserInfo.findById(req.params.idUser).then((user)=>{
 		
 				res.status(200).json(user)
 						

@@ -1,0 +1,45 @@
+<div class="container">
+  <div *ngIf="loading;else loader" class="order">
+    <div class="order__title main-title">Order #{{idOrder}}</div>
+    <div class="order__detail">
+      <div class="order-container custom-scrollbar"
+        [ngClass]="companies.length <= 2 || positions.length <= 2 ? 'over-flow-hidden':''">
+        <div class="companies" *ngFor="let company of companies">
+          <div class="company">
+            <div class="company-cont">
+              <div class="company-cont__name"> Company: {{company.name}}</div>
+            </div>
+            <div *ngFor="let position of positions" class="products">
+              <div class="product" *ngIf="company.name===position.company">
+                <div class="product__image">
+                  <img *ngFor="let image of images" [src]="image.imageSRC" alt="product__image"
+                    [ngClass]="image.idPosition !== position.idPosition ?'hide':''">
+                </div>
+                <div class="product__info position" *ngFor="let order of orders"
+                  [ngClass]="order.idPosition !== position.idPosition ? 'hide' :'' ">
+                  <div class="position__name">{{position.name}}</div>
+                  <div class="position__description">{{position.description}}</div>
+                  <div class="position__count">Count:{{order.amount}}</div>
+                  <div class="position__total-cost">Total {{order.totalCoast|currency}}</div>
+                </div>
+              </div>
+            </div>
+
+            <div class="company__address"><span>Pick-up Address:</span> {{company.pickUpAddress}}
+            </div>
+          </div>
+
+        </div>
+
+        <div class="total__price">Total <span>635.22</span></div>
+      </div>
+    </div>
+
+  </div>
+</div>
+
+<ng-template #loader>
+  <div class="loader">
+    <app-loader></app-loader>
+  </div>
+</ng-template>

@@ -4,17 +4,33 @@
     <div class="menu__form" appearance="fill">
       <mat-label class="menu__form-label">Position name</mat-label>
       <input class="menu__input" matInput [(ngModel)]="data.name">
+      <p *ngIf="data.name===''" class="red-text">The field must be filled</p>
     </div>
     <div class="menu__form" appearance="fill">
       <mat-label class="menu__form-label">Position description</mat-label>
       <input class="menu__input" matInput [(ngModel)]="data.description">
     </div>
+    <div class="menu__form" appearance="fill">
+      <mat-label class="menu__form-label">Amount</mat-label>
+      <input class="menu__input" matInput [(ngModel)]="data.amount">
+    </div>
+    <div class="menu__form" appearance="fill">
+      <mat-label class="menu__form-label">Coast per one position</mat-label>
+      <input class="menu__input" matInput [(ngModel)]="data.coast">
+    </div>
+    <div class="menu__form" appearance="fill">
+      <mat-label class="menu__form-label">Company name</mat-label>
+      <input class="menu__input" matInput [(ngModel)]="data.company">
+      <p *ngIf="data.company===''" class="red-text">The field must be filled</p>
+    </div>
+
 
   </div>
   <div mat-dialog-actions class="menu__buttons">
     <button class="menu__actions-btn non-btn-style hover-color" mat-button (click)="onNoClick()">Close</button>
-    <button *ngIf="!data.delete else deleting" class="menu__actions-btn non-btn-style hover-color" mat-button
-      [mat-dialog-close]="data" cdkFocusInitial>{{newCheker? 'Add new':'Update'}} </button>
+    <button *ngIf="!data.delete else deleting" [disabled]="data.company==='' ||data.company===''||data.name===''"
+      class="menu__actions-btn non-btn-style hover-color" mat-button [mat-dialog-close]="data"
+      cdkFocusInitial>{{newCheker? 'Add new':'Update'}} </button>
   </div>
 
   <ng-template #deleting>

@@ -13,6 +13,8 @@ const imageRoutes = require('./routes/image')
 const positionRoutes = require('./routes/position')
 const genusRoutes = require('./routes/genus')
 const categoriesRoutes = require('./routes/categories')
+const orderRoutes = require('./routes/order')
+const companiesRoutes = require('./routes/companies')
 
 const initialilazationAll = require('./controllers/initializationDB')
 
@@ -42,6 +44,8 @@ app.use('/api/position',imageRoutes)
 app.use('/api/position',positionRoutes)
 app.use('/api/genus',genusRoutes)
 app.use('/api/categories',categoriesRoutes)
+app.use('/api/order',orderRoutes)
+app.use('/api/companies',companiesRoutes)
 app.use('/uploads', express.static('uploads'))
 app.use('/uploads/usersAvatars/', express.static('uploads/usersAvatars/'))
 

@@ -21,7 +21,7 @@ export class PositionsService {
   count(idGenus: number): Observable<number> {
     return this.http.get<number>(`/api/menu/positions/${idGenus}`)
   }
-  getById(idPosition: string): Observable<Position> {
+  getById(idPosition: number): Observable<Position> {
     return this.http.get<Position>(`/api/menu/position/${idPosition}`)
   }
 

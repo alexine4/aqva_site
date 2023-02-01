@@ -50,6 +50,7 @@ export class HeaderComponent extends TitleStrategy implements OnInit {
     const nav = document.querySelector('.main-menu');
     const backdrop = document.querySelector('.backdrop');
 
+
     if (menu && backdrop && nav) {
       nav.classList.add('open-menu')
       menu.classList.add('active')
@@ -58,11 +59,15 @@ export class HeaderComponent extends TitleStrategy implements OnInit {
         nav.classList.remove('open-menu')
         menu.classList.remove('active')
       });
+
+
     }
-
-
   }
 
+  closeMenu() {
+    document.querySelector('.main-menu')?.classList.remove('open-menu')
+    document.querySelector('.action-icons__menu')?.classList.remove('active')
+  }
 
 }
 

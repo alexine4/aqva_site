@@ -1,6 +1,6 @@
 const Sequelize = require('sequelize')
 
-const nameDB = 'aqvaSiteDB'
+const nameDB = 'aqvasiteDB'
 exports.nameDB = nameDB
 
 const loginDB = 'root'
@@ -16,8 +16,9 @@ exports.typeDB = typeDB
 		nameDB,
 		loginDB,
 		passwordDB,
-		{
-			dialect: typeDB,
+		{	
+			dialect: typeDB
+		
 		}
 		
 	)

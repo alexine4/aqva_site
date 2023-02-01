@@ -1,0 +1,31 @@
+<div class="container">
+  <div class="orders-container" *ngIf="loading;else loader">
+    <div class="orders-container__title main-title">My orders</div>
+    <div *ngIf="orders$ | async as orders" class="orders-container__orders orders">
+      <div *ngIf="orders.length !==0 ; else empty" class="orders">
+        <a *ngFor="let order of orders"
+          [routerLink]="[order.orderStatus ? 'order-detail/' : 'actual-order/', order.idOrder]"
+          class="order non-link-style">
+          <div class="order__info  hover-color-text">
+            <div class="order__title ">Order #{{order.idOrder}}</div>
+            <div class="order__date">Date: {{order.updatedAt | date:'long'}}</div>
+          </div>
+          <div class="order__button icon-arrow"></div>
+        </a>
+
+
+      </div>
+      <ng-template #empty>
+        <div class="empty">
+          There is no order item
+        </div>
+
+      </ng-template>
+    </div>
+  </div>
+  <ng-template #loader>
+    <div class="loader">
+      <app-loader></app-loader>
+    </div>
+  </ng-template>
+</div>

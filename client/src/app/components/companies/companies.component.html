@@ -1,0 +1,31 @@
+<div class="container">
+  <div class="companies-container custom-scrollbar" [ngClass]="lenght > 7 ? 'scroll':''" *ngIf="loading;else loader">
+    <div class="companies-container__title main-title">All companies </div>
+    <div *ngIf="companies$ | async as companies" class="companies-container__companies companies">
+      <div *ngIf="companies.length !==0 ; else empty" class="companies">
+        <a *ngFor="let company of companies" [routerLink]="['company',company.idCompany]"
+          class="company non-link-style">
+          <div class="company__info  hover-color-text">
+            <div class="company__title ">Company {{company.name}}</div>
+            <div class="company__data">Description: {{company.description}}</div>
+            <div class="company__data">Pick-Up address: {{company.pickUpAddress}}</div>
+          </div>
+          <div class="company__button icon-arrow"></div>
+        </a>
+
+
+      </div>
+      <ng-template #empty>
+        <div class="empty">
+          There is no order item
+        </div>
+
+      </ng-template>
+    </div>
+  </div>
+  <ng-template #loader>
+    <div class="loader">
+      <app-loader></app-loader>
+    </div>
+  </ng-template>
+</div>

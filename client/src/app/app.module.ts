@@ -36,6 +36,14 @@ import { CheckPasswordComponent } from './components/user-profile/check-password
 import { ChangePasswordComponent } from './components/user-profile/change-password/change-password.component';
 
 import { AddNewCategoryComponent } from './components/database/menu/add-new-category/add-new-category.component';
+import { AddToOrderComponent } from './components/database/product-item/add-to-order/add-to-order.component';
+import { OrderComponent } from './components/order/order.component';
+import { ActualOrderComponent } from './components/order/actual-order/actual-order.component';
+import { OrderDetailComponent } from './components/order/order-detail/order-detail.component';
+
+import { CompaniesComponent } from './components/companies/companies.component';
+import { CompanyComponent } from './components/companies/company/company.component';
+import { OrderCompliteComponent } from './components/order/order-complite/order-complite.component';
 
 
 
@@ -62,7 +70,14 @@ import { AddNewCategoryComponent } from './components/database/menu/add-new-cate
     CheckPasswordComponent,
     ChangePasswordComponent,
 
-    AddNewCategoryComponent
+    AddNewCategoryComponent,
+    AddToOrderComponent,
+    OrderComponent,
+    ActualOrderComponent,
+    OrderDetailComponent,
+    CompaniesComponent,
+    CompanyComponent,
+    OrderCompliteComponent
 
   ],
   imports: [

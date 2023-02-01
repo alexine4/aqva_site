@@ -20,24 +20,23 @@
   <div class="backdrop"></div>
   <ul class="menu-list">
     <li>
-      <button class="menu-button non-btn-style " [routerLink]="['/database/product-item/3']">
-        Database</button>
+      <button (click)="closeMenu()" class="menu-button non-btn-style " [routerLink]="['/database']"> Database</button>
     </li>
     <li>
-      <button class="menu-button non-btn-style " [routerLink]="['/']"> Marketplace</button>
+      <button (click)="closeMenu()" class="menu-button non-btn-style " [routerLink]="['/orders']"> Orders</button>
     </li>
     <li>
-      <button class="menu-button non-btn-style " [routerLink]="['/database']">Tanks</button>
+      <button (click)="closeMenu()" class="menu-button non-btn-style " [routerLink]="['/orders/actual-order']">Actual
+        order</button>
     </li>
     <li>
-      <button class="menu-button non-btn-style " [routerLink]="['/database']"> Cart</button>
+      <button (click)="closeMenu()" class="menu-button non-btn-style " [routerLink]="['/orders/order-detail']">Order
+        detail</button>
     </li>
     <li>
-      <button class="menu-button non-btn-style " [routerLink]="['/database']"> About as</button>
+      <button (click)="closeMenu()" class="menu-button non-btn-style " [routerLink]="['/companies']"> Companies</button>
     </li>
-    <li>
-      <button class="menu-button non-btn-style " [routerLink]="['/database']">Contacts</button>
-    </li>
+
 
   </ul>
 </nav>

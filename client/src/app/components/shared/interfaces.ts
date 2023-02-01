@@ -1,3 +1,5 @@
+
+
 export interface User {
 	id?: string
 	username?: string
@@ -46,6 +48,9 @@ export interface Position {
 	idGenus?: number
 	count?: number
 	delete?: boolean
+	amount: number
+	coast?: number
+	company: string
 }
 
 
@@ -71,4 +76,34 @@ export interface universalAdder {
 	type?: string
 	action?: string
 	description?: string
+	amount?: number
+	quantity?: number
+	coastPerOne?: number
+	totalCoast?: number
+}
+
+export interface Order {
+	idPosition: number
+	date?: string
+	amount: number
+	coastPerOne: number
+	totalCoast: number
+	company: string
+}
+
+export interface OrderList {
+	idUser?: number
+	idOrder: number
+	orderStatus: boolean
+	total?: number
+	updatedAt?: Date
+}
+
+export interface Company {
+	idCompany?: number
+	name: string
+	description?: string
+	pickUpAddress: string
+	phone?: string
+	email?: string
 }

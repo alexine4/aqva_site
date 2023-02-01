@@ -102,6 +102,16 @@ module.exports.getAllByPosition = async (idPosition)=>{
 	}
 
 }
+module.exports.getOneByPosition = async (idPosition)=>{
+	return await Image.findOne({
+		where:
+		{
+			idPosition
+		}
+	})
+
+
+}
 
 module.exports.getById = async (idImage)=>{
 	const image = await Image.findOne({

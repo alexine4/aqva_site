@@ -7,10 +7,10 @@ $md4:450px;
 	align-items: center;
 		justify-content: space-between;
 	flex-direction: column;
-	height: 300px;
+	height: auto;
 	width: 300px;
 	@media (min-width: $md4){
-		height: 400px;
+		height: auto;
 		width: 400px;
 	}
 
@@ -33,9 +33,9 @@ $md4:450px;
 		align-items: center;
 		justify-content: center;
 		flex-direction: column;
-		height: 200px;
+		height: auto;
 		@media (min-width: $md4){
-			height: 300px;
+			height: auto;
 		}
 		width: inherit;
 	}

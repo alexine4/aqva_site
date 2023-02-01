@@ -1,0 +1,11 @@
+<div class="container">
+  <div class="container__text">Would you really like to confirm order <span>#{{data.idOrder}}</span> for a total of
+    <span>{{data.total|currency}} </span>?
+  </div>
+  <div class="container__buttuns">
+    <div class="container__button  hover-color btn-blc non-btn-style" [mat-dialog-close]="false" cdkFocusInitial>Cancel
+    </div>
+    <div class="container__button  hover-color btn-blc non-btn-style" [mat-dialog-close]="true" cdkFocusInitial>Confirm
+      order</div>
+  </div>
+</div>

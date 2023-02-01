@@ -1,0 +1,83 @@
+$md1:1440px;
+$md2:978px;
+$md3:768px;
+$md4:425px;
+
+.container{
+	display: flex;
+	align-items: center;
+	justify-content: center;
+	flex-direction:column ;
+}
+.order {
+	display: flex;
+	align-items: center;
+	justify-content: center;
+	flex-direction: column;
+	
+}
+.field {
+	display: flex;
+	align-items: center;
+	justify-content: center;
+	flex-direction: column;
+	margin: 10px 0 5px 0;
+	font-family: Aleo;
+	font-size: 16px;
+	width: 450px;
+	@media (max-width: $md4){
+		width: 320px;
+	}
+
+}
+.title {
+	font-weight: 700;
+}
+.input {
+	width: inherit;
+	display: flex;
+	align-items: center;
+	justify-content: center;
+	text-align: center;
+	height: 40px;
+	border-radius: 15px;
+	@media (min-width: $md3){
+	&:hover{
+		border: 1px solid #000;
+	}
+	}
+
+	border: 1px solid rgba(27, 39, 214, 0.747);
+	
+	
+}
+
+
+.form-error{
+	display: flex;
+	margin: 5px 0 ;
+}
+.error{
+	display: flex;
+	margin: 0;
+}
+.form__btn{
+	display: flex;
+	align-items: center;
+	justify-content: center;
+width: 280px;
+font-size: 20px;
+line-height: 26px;
+	height: 40px;
+	margin: 20px 0 ;
+	border-radius: 20px;
+}
+.message{
+	top: -450px;
+	padding: 100px 15px;
+}
+.activeMessage{
+	max-height: 650px;
+	position: relative;
+	top: 135px;
+}

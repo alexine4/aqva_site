@@ -5,8 +5,6 @@ const upload = require('../middleware/uploadsAvatar')
 
 const controllerUser = require('../controllers/user')
 
-const errorHandler = require('../utils/errorHandler')
-
 const router = express.Router()
 
 // image 
@@ -17,6 +15,7 @@ router.get('/', passport.authenticate('jwt', { session: false }), controllerUser
 router.patch('/', passport.authenticate('jwt', { session: false }), controllerUser.update)
 router.patch('/change-password', passport.authenticate('jwt', { session: false }), controllerUser.updatePassword)
 router.get('/user-info', passport.authenticate('jwt', { session: false }), controllerUser.getInfoByActualUser)
+router.get('/user-info/:idUser', passport.authenticate('jwt', { session: false }), controllerUser.getInfoByUser)
 router.patch('/user-info', passport.authenticate('jwt', { session: false }), controllerUser.updateUserInfo)
 router.patch('/user-info/upload-image',upload.single('image'), passport.authenticate('jwt', { session: false }), controllerUser.updateUserImage)
 

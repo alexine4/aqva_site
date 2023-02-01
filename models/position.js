@@ -34,6 +34,19 @@ module.exports.initialization = async()=>{
 				type: Sequelize.STRING,
 				allowNull:true
 			},
+			coast:{
+				type: Sequelize.FLOAT,
+				allowNull:true
+			},
+			amount:{
+				type: Sequelize.INTEGER,
+				allowNull:false
+			},
+			company:{
+				type: Sequelize.STRING,
+				allowNull:false
+			},
+			
 			idGenus:{
 				type: Sequelize.INTEGER,
 				allowNull:false
@@ -47,12 +60,15 @@ module.exports.initialization = async()=>{
 		return true
 	}
 
- module.exports.create = async(name,description,idGenus)=>{
+ module.exports.create = async(name,description,idGenus,coast,amount,company)=>{
 	await Position.create(
 		{
 			name,
 			description,
-			idGenus
+			idGenus,
+			coast,
+			amount,
+			company
 		}
 	)
 	
@@ -67,44 +83,34 @@ module.exports.remove = async(idPosition)=>{
 	})
 }
 
-module.exports.update= async(idPosition,name,description)=>{
+module.exports.update= async(idPosition,name,description,coast,amount,company)=>{
 	
-	if(idPosition&&name&&!description){
-		
-		await Position.update({
-			name
-		},
-		{
-			where:{
-				idPosition
-			}
-			
-		})
-	}else if(idPosition&&description&&!name){
-		
-		await Position.update({
-			description
-		},
-		{
-			where:{
-				idPosition
-			}
-			
-		})
-	}else if(idPosition&&name&&description)
+	await Position.update({
+		name,
+		description,
+		coast,
+		amount,
+		company
+	},
 	{
-		await Position.update({
-			
-			name,
-			description
-		},
-		{
-			where:{
-				idPosition
-			}
-			
-		})
-	}
+		where:{
+			idPosition
+		}
+		
+	})
+	
+}
+module.exports.updateCompany= async(newCompany,lastCompany)=>{
+	
+	await Position.update({
+		company: newCompany
+	},
+	{
+		where:{
+			company: lastCompany
+		}
+		
+	})
 	
 }
 

@@ -1,0 +1,76 @@
+<div class="container">
+  <div class="container__wrapper" *ngIf="!message; else messageInfo">
+    <div *ngIf="loading;else loader" class="order">
+      <div class="order-main__title main-title">Actual order</div>
+      <div class="order__detail">
+        <div class="order-container">
+          <div class="order__title">Order #{{idOrder}}</div>
+          <div class="companies" *ngFor="let company of companies">
+            <div class="company">
+              <div class="company-cont">
+
+                <div class="company-cont__name"> Company: {{company.name}}</div>
+              </div>
+              <div *ngFor="let position of positions" class="products">
+                <div class="product" *ngIf="company.name===position.company">
+
+                  <div class="product__image">
+                    <img *ngFor="let image of images" [src]="image.imageSRC" alt="product__image"
+                      [ngClass]="image.idPosition !== position.idPosition ?'hide':''">
+                  </div>
+                  <div class="product__info position" *ngFor="let order of orders"
+                    [ngClass]="order.idPosition !== position.idPosition ? 'hide' :'' ">
+                    <div class="position__name">{{position.name}}</div>
+                    <div class="position__description"> {{position.description}}</div>
+                    <div class="position__details">
+                      <div class="position__price">{{order.coastPerOne|currency}}</div>
+                      <div class="position__total-cost">Total {{order.totalCoast|currency}}</div>
+                    </div>
+                    <div class="count-btn">
+                      <button class="count-btn__reduce non-btn-style hover-color-text"
+                        (click)="updateInput(order.idPosition,order.amount-1)">-</button>
+                      <input class="count-btn__number" min="0" type="text" [(ngModel)]="order.amount" />
+                      <button (click)="updateInput(order.idPosition,order.amount+1)"
+                        class="count-btn__add non-btn-style hover-color-text">+</button>
+                    </div>
+                    <p *ngIf="order.amount>position.amount" class="error">Incorrect count! You enter {{order.amount}}
+                      but
+                      we have {{position.amount}}</p>
+                    <p *ngIf="order.amount<0" class="error">Incorrect count! enter correct value</p>
+                  </div>
+
+                </div>
+              </div>
+
+              <div class="company__address"><span>Pick-up Address:</span>
+                {{company.pickUpAddress}}</div>
+            </div>
+
+
+          </div>
+
+          <div class="total__price">Total <span>{{total | currency}}</span></div>
+        </div>
+
+      </div>
+      <button [disabled]="disabled" (click)="applyOrder()" class="apply-order btn-blc non-btn-style "
+        [ngClass]="{'hover-color':!disabled} ">Apply order</button>
+
+    </div>
+  </div>
+
+</div>
+<ng-template #messageInfo>
+  <div class="message">
+    <p *ngIf="updateMessageStatus" class="message__text">Order #{{idOrder}} successfully completed</p>
+    <p *ngIf="!updateMessageStatus" class="message__text">Order #{{idOrder}} unsuccessfully completed!
+      <br>Please repeat in next time
+    </p>
+  </div>
+</ng-template>
+
+<ng-template #loader>
+  <div class="loader">
+    <app-loader></app-loader>
+  </div>
+</ng-template>

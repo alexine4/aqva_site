@@ -26,7 +26,8 @@
       <div *ngIf="viewPositions.length !==0 ; else empty" class="category-positions__wraperr ">
 
         <div *ngFor="let viewPosition of viewPositions | filterProducts:find | sorterProducts: sortParam"
-          class="position hover-border" [routerLink]="['/database/product-item/', viewPosition.idPosition]">
+          class="position " [ngClass]=" viewPosition.amount>0?'hover-border' : 'hover-border-silver'"
+          [routerLink]="['/database/product-item/', viewPosition.idPosition]">
 
           <div *ngIf="images.length > 0 ; else loader" class="position__image">
             <div *ngFor="let image of images">
@@ -47,6 +48,8 @@
           </div>
           <div class="position__title">{{viewPosition.name}}</div>
           <div class="position__description">{{viewPosition.description}}</div>
+          <div class="position__amount">
+            {{viewPosition.amount > 0 ? 'Is available: '+viewPosition.amount : 'Not available'}}</div>
 
         </div>
       </div>

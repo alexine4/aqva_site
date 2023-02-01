@@ -1,0 +1,83 @@
+<div class="container" [ngClass]="updateMessage||deleteMessage? 'activeMessage': ''" *ngIf="loading;else loader">
+
+  <h2 class="container__title">Company settings</h2>
+  <form [formGroup]="signInForm" (ngSubmit)="submitSignIn()" class="order">
+
+    <div class="fields">
+      <div class="field">
+        <p class="title">Name</p>
+        <input formControlName="name" type="text" placeholder="Name" class="input" />
+        <p class="error" *ngIf="this.signInForm.get('name')?.invalid && this.signInForm.get('name')?.touched ">
+          <small class="form-error">
+            The form must be filled out!!!
+          </small>
+        </p>
+      </div>
+      <div class="field">
+        <p class="title">Description</p>
+        <input formControlName="description" type="text" placeholder="Description" class="input" />
+      </div>
+      <div class="field">
+        <p class="title">Pick-Up Address</p>
+        <input formControlName="pickUpAddress" type="text" placeholder="Pick-Up Address" class="input" />
+        <p class="error"
+          *ngIf="this.signInForm.get('pickUpAddress')?.invalid && this.signInForm.get('pickUpAddress')?.touched ">
+          <small class="form-error">
+            The form must be filled out!!!
+          </small>
+        </p>
+      </div>
+      <div class="field">
+        <p class="title">Email</p>
+        <input formControlName="email" type="email" placeholder="Email" class="input" />
+        <p class="error" *ngIf="this.signInForm.get('email')?.invalid && this.signInForm.get('email')?.touched ">
+          <small class="form-error">
+            Invalid format!!! Example: Example@Example.com
+          </small>
+        </p>
+      </div>
+      <div class="field">
+        <p class="title">Phone</p>
+        <input formControlName="phone" type="phone" placeholder="Phone" class="input"
+          ng-model-options="{ debounce: 250 }" />
+        <p class="error" *ngIf="this.signInForm.get('phone')?.invalid && this.signInForm.get('phone')?.touched ">
+          <small class="form-error">
+            Invalid format!!! Example: +300123456789 or 300123789
+          </small>
+        </p>
+      </div>
+
+    </div>
+
+
+
+    <button
+      [disabled]="signInForm.invalid|| (this.signInForm.value.name=== company.name&& this.signInForm.value.pickUpAddress ===company.pickUpAddress&& this.signInForm.value.email ===company.email&&this.signInForm.value.phone ==company.phone )"
+      [ngClass]="signInForm.invalid|| (this.signInForm.value.name === company.name&& this.signInForm.value.pickUpAddress ===company.pickUpAddress&& this.signInForm.value.email ===company.email&&this.signInForm.value.phone ==company.phone ) ? '':'hover-color' "
+      type="submit" class="form__btn btn-blc non-btn-style">Save
+      changes</button>
+    <button type="button" (click)="deleteCompany()" class="form__btn btn-blc non-btn-style hover-color">
+      Delete company
+    </button>
+
+  </form>
+
+  <div *ngIf="updateMessage || deleteMessage " class="message">
+    <div *ngIf="updateStatus && !deleteMessage " class="message__text">
+      The company was successfully updated
+    </div>
+    <div *ngIf="!updateStatus&& !deleteMessage " class="message__text">
+      The company was not updated because company with this name already exist`s
+    </div>
+    <div *ngIf="deleteMessage" class="message__text">
+      The company was successfully deleted
+    </div>
+  </div>
+
+
+</div>
+<ng-template #loader>
+  <div class="loader">
+    <app-loader></app-loader>
+  </div>
+</ng-template>

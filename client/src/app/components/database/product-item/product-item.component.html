@@ -1,4 +1,5 @@
-<div class="container" [ngClass]="updateMessage || deleteMessage ||createMessage ? 'active-container' : ''">
+<div class="container"
+  [ngClass]="updateMessage || deleteMessage ||createMessage || addToOrderMessage ? 'active-container' : ''">
   <div *ngIf="!loading; else loader">
     <div id="item-container" class="item-container">
       <div class="item-container__nav ">
@@ -36,7 +37,7 @@
                   <img [src]="image.imageSRC" [alt]="position.name + ' ' + i">
                 </div>
                 <div class="slide__image-creator">
-                  <img src="" alt="">
+                  <img [src]="UserInfo[i].imageSRC" alt="user_photo">
                 </div>
               </div>
             </div>
@@ -53,6 +54,14 @@
         </div>
 
       </div>
+      <div class="order-info">
+        <div class="order-info__info">Amount: <span>{{position.amount ===0?'Not available':position.amount}}</span>
+        </div>
+        <div class="order-info__info">Coasts: <span>{{position.coast}}</span></div>
+        <button (click)="addToOrder()" [disabled]="position.amount ===0"
+          class="order-info__button non-btn-style btn-blc " [ngClass]="position.amount ===0?'': 'hover-color'">Buy
+          now</button>
+      </div>
       <div class="item-container__menu menu-items">
         <button class="menu-items__item non-btn-style hover-color" (click)="uploadPositionImage(position)">Select from
           gallery</button>
@@ -68,10 +77,12 @@
 
   </ng-template>
   <ng-template #loader>
-    <app-loader></app-loader>
+    <div class="loader">
+      <app-loader></app-loader>
+    </div>
   </ng-template>
 
-  <div *ngIf="updateMessage || deleteMessage ||createMessage" class="message">
+  <div *ngIf="updateMessage || deleteMessage ||createMessage ||addToOrderMessage" class="message">
     <div *ngIf="updateMessage" class="message__text">
       The position item was successfully updated
     </div>
@@ -80,6 +91,9 @@
     </div>
     <div *ngIf="createMessage" class="message__text">
       The position item was successfully added
+    </div>
+    <div *ngIf="addToOrderMessage" class="message__text">
+      The position item was {{addToOrderResult? 'successfully' : 'not'}} added to order
     </div>
   </div>
 

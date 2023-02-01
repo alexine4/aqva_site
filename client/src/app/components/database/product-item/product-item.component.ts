@@ -6,12 +6,15 @@ import { switchMap } from 'rxjs/operators';
 
 import { Clipboard } from '@angular/cdk/clipboard'
 
-import { Position, Image } from '../../shared/interfaces';
+import { Position, Image, UserInfo } from '../../shared/interfaces';
 import { PositionsService } from '../../shared/services/menu/positions.service';
 import { MatDialog } from '@angular/material/dialog';
 import { NewItemComponent } from './new-item/new-item.component';
 import { SelectImageComponent } from './select-image/select-image.component';
 import { ImagePositionService } from '../../shared/services/image-position.service';
+import { AddToOrderComponent } from './add-to-order/add-to-order.component';
+import { OrderService } from '../../shared/services/order.service';
+import { UserService } from '../../shared/services/user.service';
 
 
 
@@ -35,6 +38,7 @@ export class ProductItemComponent implements OnInit {
 
   images$!: Observable<Image[]>
   imagesArr!: Image[]
+  UserInfo!: UserInfo[]
 
   copyLink = false
   activeSettings = false
@@ -42,6 +46,8 @@ export class ProductItemComponent implements OnInit {
   deleteMessage = false
   deleteSuccess = false
   createMessage = false
+  addToOrderMessage = false
+  addToOrderResult = false
   timeout = 5000
 
 
@@ -49,8 +55,10 @@ export class ProductItemComponent implements OnInit {
     private route: ActivatedRoute,
     private router: Router,
     private positionService: PositionsService,
-    public dialog: MatDialog,
     private imageService: ImagePositionService,
+    private orderService: OrderService,
+    private userService: UserService,
+    public dialog: MatDialog,
     private clipboard: Clipboard,
   ) { }
 
@@ -64,6 +72,7 @@ export class ProductItemComponent implements OnInit {
             this.images$.subscribe(
               images => {
                 this.imagesArr = images
+
               }
 
             )
@@ -75,20 +84,42 @@ export class ProductItemComponent implements OnInit {
         )
       ).subscribe(
         position => {
+          this.takeImageUsers()
           if (position) {
             this.position = {
               idPosition: position.idPosition,
               name: position.name,
               description: position.description,
-              idGenus: position.idGenus
+              coast: position.coast,
+              amount: position.amount,
+              idGenus: position.idGenus,
+              company: position.company
             }
           }
 
           this.loading = false
         }
       )
+  }
 
+  takeImageUsers() {
+    this.UserInfo = [{
+      idUser: 0
+    }]
 
+    for (let index = 0; index < this.imagesArr.length; index++) {
+      this.userService.fetchUserInfoById(this.imagesArr[index].idUser).subscribe(
+        userInfo => {
+
+          if (index === 0) {
+            this.UserInfo[0] = userInfo
+          } else {
+            this.UserInfo.push(userInfo)
+          }
+
+        }
+      )
+    }
   }
 
   updatePosition(position: Position) {
@@ -96,7 +127,7 @@ export class ProductItemComponent implements OnInit {
 
     const dialogRef = this.dialog.open(NewItemComponent, {
 
-      data: { name: position.name, description: position.description },
+      data: { name: position.name, description: position.description, coast: position.coast, amount: position.amount, company: position.company },
     });
 
     dialogRef.afterClosed().subscribe(result => {
@@ -104,7 +135,10 @@ export class ProductItemComponent implements OnInit {
         const newPosition = {
           idPosition: this.position.idPosition,
           name: result.name,
-          description: result.description
+          description: result.description,
+          amount: result.amount,
+          coast: result.coast,
+          company: result.company
         }
         this.positionService.update(newPosition)
           .subscribe(
@@ -113,7 +147,10 @@ export class ProductItemComponent implements OnInit {
                 this.position = {
                   idPosition: this.position.idPosition,
                   name: newPosition.name,
-                  description: newPosition.description
+                  description: newPosition.description,
+                  coast: newPosition.coast,
+                  amount: newPosition.amount,
+                  company: newPosition.company
                 }
                 dialogRef.close()
                 this.updateMessage = true
@@ -145,7 +182,7 @@ export class ProductItemComponent implements OnInit {
 
     const dialogRef = this.dialog.open(NewItemComponent, {
 
-      data: { name: '', description: '' },
+      data: { name: '', description: '', amount: 0, coast: 0, company: '', companyAddress: '' },
     });
 
     dialogRef.afterClosed().subscribe(result => {
@@ -154,7 +191,11 @@ export class ProductItemComponent implements OnInit {
 
           name: result.name,
           description: result.description,
-          idGenus: this.position.idGenus
+          idGenus: this.position.idGenus,
+          coast: result.coast,
+          amount: result.amount,
+          company: result.company,
+          companyAddress: result.companyAddress
         }
         this.positionService.create(newPosition)
           .subscribe(
@@ -230,7 +271,7 @@ export class ProductItemComponent implements OnInit {
     })
 
     dialogRef.afterClosed().subscribe(result => {
-      let position = this.position.idPosition?.toString()
+      let position = this.position.idPosition
       if (position !== undefined) {
         this.images$ = this.imageService.getByPosition(position)
       }
@@ -298,7 +339,7 @@ export class ProductItemComponent implements OnInit {
   //--------------------------------------------------------
 
 
-
+  // copy link
   shareLink() {
     this.clipboard.copy(window.location.href);
     this.copyLink = true
@@ -306,11 +347,58 @@ export class ProductItemComponent implements OnInit {
       this.copyLink = false
     }, this.timeout / 2);
   }
+
+  // dowmload image
   downloadActiveImage() {
     let a = document.createElement("a");
     a.href = "http://localhost:4200/" + this.imagesArr[this.selectedIndex].imageSRC;
     a.download = this.position.name + "_image_" + this.selectedIndex;
     a.click();
+  }
+
+  //add to order
+  addToOrder() {
+    const dialogRef = this.dialog.open(AddToOrderComponent, {
+
+      data: { name: this.position.name, coastPerOne: this.position.coast, quantity: 0, amount: this.position.amount, totalCoast: 0 },
+    });
+    dialogRef.afterClosed().subscribe(
+      result => {
+        if (this.position.idPosition && this.position.coast) {
+          const newOrder = {
+            idPosition: this.position.idPosition,
+            amount: result.quantity,
+            coastPerOne: this.position.coast,
+            totalCoast: result.totalCoast,
+            company: this.position.company
+          }
+
+          this.orderService.addToOrder(newOrder).subscribe(
+            result => {
+              if (result) {
+                this.addToOrderMessage = true
+                this.addToOrderResult = true
+                setTimeout(() => {
+                  this.addToOrderMessage = false
+                  this.addToOrderResult = false
+                }, this.timeout);
+              }
+              else {
+                this.addToOrderMessage = true
+                setTimeout(() => {
+                  this.addToOrderMessage = false
+                }, this.timeout);
+              }
+            }
+          )
+        }
+
+
+
+
+
+      }
+    )
   }
 
 

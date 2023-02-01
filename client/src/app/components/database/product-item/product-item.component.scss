@@ -12,9 +12,9 @@ height: auto ;
 	
 }
 .active-container{
-	max-height: 620px;
+	max-height: 740px;
 	position: relative;
-	top: 120px;
+	top: 130px;
 }
 .item-container {
 	
@@ -85,7 +85,7 @@ display: flex;
 	position: relative;
 	width: 40px;
 	height: 40px;
-	background: url('../../shared/image/gear.svg')  0 0 / 100% no-repeat;
+	background: url('../../shared/image/gear12.svg')  0 0 / 100% no-repeat;
 
 	
 	
@@ -197,7 +197,9 @@ height: auto;
 		// .position-item__slider
 
 		&__slider {
+			
 		}
+
 }
 .position-header {
 	display: flex;
@@ -227,10 +229,11 @@ height: auto;
 .image-list{
 	position: relative;
 	height: 375px;
+	
 }
 .slide {
 
-
+	
 		// .slide__color
 
 		&__color {
@@ -259,8 +262,9 @@ height: auto;
 		// .slide__image
 
 		&__image {
-
+			
 			img{
+				overflow: hidden;
 				position: relative;
 				border-radius: 20px;
 				top: -35px;
@@ -298,6 +302,11 @@ height: auto;
 			top: -100px;
 				left:  15px;
 			}
+			img{
+				border-radius: 50%;
+				height: 50px;
+			width: 50px;
+			}
 		}
 }
 .menu-items {
@@ -332,9 +341,10 @@ height: auto;
 }
 
 
+
 .empty{
 	display:flex ;
-	height: 745px;
+	
 	font-size: 30px;
 }
 
@@ -370,6 +380,7 @@ overflow: hidden;
 		left: 60px;
 		top: -40px;
 		}
+	
 		
 	}
 
@@ -381,6 +392,7 @@ overflow: hidden;
 		}
 }
 .slide{
+	
 	position: relative;
 	top: 0;
 	left: 0;
@@ -422,14 +434,14 @@ overflow: hidden;
 	@media (min-width: $md3){
 	&:hover{
 	opacity: 1;
+	scale: 1.5;
 	}
 	}
 
 }
 .dot-active{
-	width: 20px;
-	height: 20px;
-		
+	opacity: 1;
+	scale: 1.3;
 }
 
 .nav-arrow {
@@ -497,6 +509,8 @@ overflow: hidden;
 	&_long {
 	}
 }
+//=========================================================================================================================================================================================================================================
+
 
 .copy-link-success{
 	background: rgba(0, 0, 0, 0.774);
@@ -533,7 +547,58 @@ overflow: hidden;
 }
 
 .message{
-	top: -425px;
+	top: -540px;
 	padding: 100px 15px;
+}
+
+
+.order-info {
+	font-family: Aleo;
+	margin: 10px 0 0 0;
+	width: inherit;
+	display: flex;
+	align-items:center;
+	flex-direction: column;
+	font-size: 16px;
+	line-height: 20px;
+	
+
+	// .order-info__info
+
+	&__info {
+	width: inherit;
+	display: flex;
+	align-items:flex-start;
+	flex-direction: row;
+		margin: 0px 0 10px;
+		span{
+			padding: 0 10px;
+			font-size: 18px;
+		}
+	}
+
+	// .order-info__button
+
+	&__button {
+		cursor: pointer;
+		transition: all 1s ease 0s;
+		font-family: Aleo;
+		display: flex;
+	align-items:center;
+	justify-content: center;
+	padding: 5px;
+	width: 225px;
+	height: 40px;
+	border-radius: 15px;
+	font-size: 22px;
+	
+	}
+}
+.non-btn-style {
+}
+.loader{
+	display: flex;
+	position: relative;
+	top: 225px;
 }
 

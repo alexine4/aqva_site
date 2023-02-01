@@ -18,6 +18,9 @@ export class UserService {
   fetchUserInfo(): Observable<UserInfo> {
     return this.http.get<UserInfo>(`/api/user/user-info`)
   }
+  fetchUserInfoById(idUser: number): Observable<UserInfo> {
+    return this.http.get<UserInfo>(`/api/user/user-info/${idUser}`)
+  }
 
   updateUser(user: User): Observable<Boolean> {
     return this.http.patch<Boolean>(`/api/user/`, user)

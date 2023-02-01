@@ -13,6 +13,7 @@ router.post('/image/add', upload.single('image'),passport.authenticate('jwt', { 
 router.patch('/image/update/:idImage', upload.single('image'),passport.authenticate('jwt', { session: false }), controllerImage.update)
 router.delete('/image/delete/:idImage',passport.authenticate('jwt', { session: false }), controllerImage.delete)
 router.get('/images/:idPosition', passport.authenticate('jwt', { session: false }), controllerImage.getAllByPosition)
+router.get('/image-by-pos/:idPosition', passport.authenticate('jwt', { session: false }), controllerImage.getOneByPosition)
 router.get('/image/:idImage', passport.authenticate('jwt', { session: false }), controllerImage.getById)
 
 //=========================================================================================================================================================================================================================================
