@@ -44,7 +44,8 @@ $md3:770px;
 $md4:425px;
 
 .page {
-	height: 90vh;
+	min-height: 100vh;
+	height:auto;
 	font-family: Aleo;
 	font-size: 14px;
 

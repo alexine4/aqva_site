@@ -11,10 +11,13 @@
     </button>
     <div class="color-picker">
       <div class="color-picker__title">What color do you want to associate with this image? </div>
-      <input (change)="changeColor(color)" [(ngModel)]="color" type="color" class=" center" #inputColor>
-      <button id="color" class="color-picker__button non-btn-style hover-color" (click)="colorClick()">
+      <div class="color-picker__btn">
+        <input (change)="changeColor(color)" [(ngModel)]="color" type="color" class=" center" #inputColor>
+        <button id="color" class="color-picker__button non-btn-style hover-color" (click)="colorClick()"> </button>
+      </div>
 
-      </button>
+
+
     </div>
 
     <div class="actions-btn">

@@ -13,6 +13,9 @@ export class OrderService {
   fetch(): Observable<OrderList[]> {
     return this.http.get<OrderList[]>(`/api/order/order-list`)
   }
+  fetchActual(): Observable<OrderList> {
+    return this.http.get<OrderList>(`/api/order/actual-order`)
+  }
 
   fetchAllOrder(idOrder: number): Observable<Order[]> {
     return this.http.get<Order[]>(`/api/order/all-orders/${idOrder}`)

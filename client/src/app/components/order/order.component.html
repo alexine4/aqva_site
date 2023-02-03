@@ -9,12 +9,16 @@
           <div class="order__info  hover-color-text">
             <div class="order__title ">Order #{{order.idOrder}}</div>
             <div class="order__date">Date: {{order.updatedAt | date:'long'}}</div>
+            <div *ngIf="order.total!==0; else total" class="order__total">Total: {{order.total|currency}}</div>
           </div>
           <div class="order__button icon-arrow"></div>
         </a>
 
 
       </div>
+      <ng-template #total>
+        <div class="order__total">Actual order</div>
+      </ng-template>
       <ng-template #empty>
         <div class="empty">
           There is no order item

@@ -42,6 +42,8 @@ try {
 	await Companies.findOneByID(req.params.idCompany).then(companyBefore=>{
 		Companies.findOneByName(req.body.name).then(
 			companyByName=>{
+				if (companyByName) {		
+				
 				if (companyByName.dataValues.idCompany !== companyBefore.dataValues.idCompany) {
 					res.status(200).json(false)
 				} else {
@@ -53,6 +55,7 @@ try {
 					)
 				}
 			}
+		}
 		)
 
 	})

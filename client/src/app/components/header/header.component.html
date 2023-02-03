@@ -3,7 +3,8 @@
     {{this.title.getTitle()}}
   </div>
   <div class="header-container__icons action-icons">
-    <button class="action-icons__cart icon-cart non-btn-style hover-color-text" [routerLink]="'/cart'"></button>
+    <button class="action-icons__cart icon-cart non-btn-style hover-color-text"
+      [routerLink]="[orderList?'orders/actual-order/' + orderList.idOrder:'orders']"></button>
     <button class="action-icons__user  non-btn-style" [routerLink]="'/user-profile'">
       <img *ngIf="userInfo.imageSRC !=='' && userInfo.imageSRC !==null" [src]="userInfo.imageSRC" alt="user image">
     </button>
@@ -26,13 +27,10 @@
       <button (click)="closeMenu()" class="menu-button non-btn-style " [routerLink]="['/orders']"> Orders</button>
     </li>
     <li>
-      <button (click)="closeMenu()" class="menu-button non-btn-style " [routerLink]="['/orders/actual-order']">Actual
-        order</button>
+      <button (click)="closeMenu()" class="menu-button non-btn-style " [routerLink]="['/orders/actual-order']">Contact
+        as</button>
     </li>
-    <li>
-      <button (click)="closeMenu()" class="menu-button non-btn-style " [routerLink]="['/orders/order-detail']">Order
-        detail</button>
-    </li>
+
     <li>
       <button (click)="closeMenu()" class="menu-button non-btn-style " [routerLink]="['/companies']"> Companies</button>
     </li>

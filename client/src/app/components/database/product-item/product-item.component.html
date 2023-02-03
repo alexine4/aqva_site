@@ -1,5 +1,5 @@
 <div class="container"
-  [ngClass]="updateMessage || deleteMessage ||createMessage || addToOrderMessage ? 'active-container' : ''">
+  [ngClass]="{'active-container': updateMessage || deleteMessage ||createMessage || addToOrderMessage ,'max-cont':copyLink}">
   <div *ngIf="!loading; else loader">
     <div id="item-container" class="item-container">
       <div class="item-container__nav ">

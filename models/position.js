@@ -100,6 +100,31 @@ module.exports.update= async(idPosition,name,description,coast,amount,company)=>
 	})
 	
 }
+module.exports.updateAmount= async(idPosition,newAmount)=>{
+	
+	const positionOld =  await Position.findOne({where:{idPosition}})
+		
+			if (positionOld) {
+				let newamount = positionOld.dataValues.amount - newAmount
+				if (newamount <0){
+					newamount = 0
+				}
+				
+				Position.update({
+					amount: newamount
+				},
+				{
+					where:{
+						idPosition
+					}
+					
+				})
+			}
+		
+		
+	
+	
+}
 module.exports.updateCompany= async(newCompany,lastCompany)=>{
 	
 	await Position.update({

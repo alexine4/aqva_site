@@ -18,7 +18,7 @@ export class RegisterPageComponent implements OnInit {
   username: string | any
   logInForm!: FormGroup
   nextStep = false
-  time = 1000
+  time = 5000
   emailExists = false
   usernameExists = false
   status: UserStatus | any

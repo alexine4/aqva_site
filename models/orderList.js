@@ -30,7 +30,7 @@ module.exports.initialization = async()=>{
 				autoIncrement: true
 			},
 			total: {
-				type: Sequelize.INTEGER,
+				type: Sequelize.FLOAT,
 				allowNull:true,
 				defaultValue: 0
 			},
@@ -81,5 +81,5 @@ module.exports.findOne = async (idUser,orderStatus)=>{
 	return orderList
 }
 module.exports.findAll = async(idUser)=>{
-	return await OrderList.findAll({where:{idUser}})
+	return await (await OrderList.findAll({where:{idUser},order:[['updatedAt','DESC']]}))
 }

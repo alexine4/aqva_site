@@ -168,10 +168,10 @@ export class DatabaseComponent implements OnInit {
       this.types$ = this.typesService.fetchByCategory(idCategory)
       this.types$.subscribe(
         () => {
-          setTimeout(() => { this.relativeHieghtMenu() }, 50)
+          setTimeout(() => { this.relativeHieghtMenu() }, 500)
         },
         error => {
-          this.error = error, setTimeout(() => { this.relativeHieghtMenu() }, 50)
+          this.error = error, setTimeout(() => { this.relativeHieghtMenu() }, 500)
         },
       )
       this.typesService.count(idCategory).subscribe(
@@ -202,10 +202,10 @@ export class DatabaseComponent implements OnInit {
       this.viewPositions$ = this.positionService.fetchByType(idType)
       this.genusies$.subscribe(
         () => {
-          setTimeout(() => { this.relativeHieghtMenu() }, 50)
+          setTimeout(() => { this.relativeHieghtMenu() }, 500)
         },
         error => {
-          this.error = error, setTimeout(() => { this.relativeHieghtMenu() }, 50)
+          this.error = error, setTimeout(() => { this.relativeHieghtMenu() }, 500)
         })
       this.genusService.count(idType).subscribe(
         score => {
@@ -233,10 +233,10 @@ export class DatabaseComponent implements OnInit {
       this.viewPositions$ = this.positions$
       this.positions$.subscribe(
         () => {
-          setTimeout(() => { this.relativeHieghtMenu() }, 50)
+          setTimeout(() => { this.relativeHieghtMenu() }, 500)
         },
         error => {
-          this.error = error, setTimeout(() => { this.relativeHieghtMenu() }, 50)
+          this.error = error, setTimeout(() => { this.relativeHieghtMenu() }, 500)
         })
       this.positionService.count(idGenus).subscribe(
         score => {
@@ -261,7 +261,7 @@ export class DatabaseComponent implements OnInit {
         this.score = this.activeCategory.count
         this.menuTitle = ''
       }
-      setTimeout(() => { this.relativeHieghtMenu() }, 50)
+      setTimeout(() => { this.relativeHieghtMenu() }, 500)
 
     } else if (!this.secondLayer && this.thirdLayer && !this.forsLayer) {
       this.secondLayer = true
@@ -275,7 +275,7 @@ export class DatabaseComponent implements OnInit {
         this.score = this.activeType.count
         this.menuTitle = this.activeCategory.name
       }
-      setTimeout(() => { this.relativeHieghtMenu() }, 50)
+      setTimeout(() => { this.relativeHieghtMenu() }, 500)
 
     } else if (!this.secondLayer && !this.thirdLayer && this.forsLayer) {
       this.thirdLayer = true
@@ -287,7 +287,7 @@ export class DatabaseComponent implements OnInit {
         this.score = this.activeGenus.count
         this.menuTitle = this.activeType.name
       }
-      setTimeout(() => { this.relativeHieghtMenu() }, 50)
+      setTimeout(() => { this.relativeHieghtMenu() }, 500)
 
     }
   }

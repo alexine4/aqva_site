@@ -7,14 +7,14 @@ $md4:450px;
 	align-items: center;
 	flex-direction: column;
 height: auto ;
-
+	
 	justify-content: center;
 	
 }
 .active-container{
 	max-height: 740px;
 	position: relative;
-	top: 130px;
+	top: 110px;
 }
 .item-container {
 	
@@ -519,17 +519,20 @@ overflow: hidden;
 	align-items: center;
 	text-align: center;
 	justify-content: center;
-	height: 150px;
-	width: 400px;
-	top: -750px;
-	left: 95px;
+	padding: 30px 50px;
+	top: -645px;
+	left: 40px;
 	font-size: 24px;
 	border-radius: 20px;
 	color: #ffffff;
 	z-index: 10;
 
 }
-
+.max-cont{
+	position: relative;
+	top: 50px;
+	max-height:750px;
+}
 
 .active-settings{
 

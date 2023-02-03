@@ -23,7 +23,7 @@ export class ActualOrderComponent implements OnInit {
   companies!: Company[]
   positions!: Position[]
   images!: Image[]
-  changed = false
+
   total!: number
   disabled!: boolean
   message = false
@@ -166,7 +166,7 @@ export class ActualOrderComponent implements OnInit {
         this.orders[index].amount = amount
         this.orders[index].totalCoast = this.orders[index].coastPerOne * this.orders[index].amount
         this.totalCost(this.orders)
-        this.changed = true
+
         for (let step = 0; step < this.positions.length; step++) {
           if (this.positions[step].idPosition === this.orders[index].idPosition) {
             if (this.orders[index].amount > this.positions[step].amount) {
@@ -194,6 +194,14 @@ export class ActualOrderComponent implements OnInit {
     dialogRef.afterClosed().subscribe(
       status => {
         if (status) {
+          this.orderService.updateOrder(this.orders).subscribe(
+            result => {
+              if (result) {
+                console.log(result);
+
+              }
+            }
+          )
           const orderList = {
             idOrder: this.idOrder,
             orderStatus: true,
@@ -217,15 +225,9 @@ export class ActualOrderComponent implements OnInit {
         }
       }
     )
-    if (this.changed) {
-      this.orderService.updateOrder(this.orders).subscribe(
-        result => {
-          if (result) {
-            this.changed = false
-          }
-        }
-      )
-    }
+
+
+
 
 
   }

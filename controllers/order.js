@@ -1,5 +1,6 @@
 const Order = require('../models/order')
 const OrderList = require('../models/orderList')
+const Position = require('../models/position')
 
 const errorHandler = require('../utils/errorHandler')
 
@@ -53,11 +54,21 @@ try {
 		if (index === array.length) {
 			await Order.update(req.body[index].idOrder,req.body[index].idPosition,req.body[index].amount,req.body[index].coastPerOne,req.body[index].totalCoast,req.body[index].company).then(
 				()=>{
-					res.status(200).json(true)
+						Position.updateAmount(req.body[index].idPosition,req.body[index].amount).then(
+						()=>{
+							res.status(200).json(true)
+						}
+					)
+					
 				}
 			)
 		}else{
 			await Order.update(req.body[index].idOrder,req.body[index].idPosition,req.body[index].amount,req.body[index].coastPerOne,req.body[index].totalCoast,req.body[index].company)
+			.then(
+				()=>{
+					Position.updateAmount(req.body[index].idPosition,req.body[index].amount)
+				}
+			)
 		}
 	} 
 	
@@ -69,6 +80,18 @@ try {
 module.exports.getAll = async(req,res)=>{
 	try {
 		await OrderList.findAll(req.user.idUser).then(
+			orders=>{
+				res.status(200).json(orders)
+			}
+		)
+	} catch (error) {
+		errorHandler(res,error)
+	}
+
+}
+module.exports.getActual = async(req,res)=>{
+	try {
+		await OrderList.findOne(req.user.idUser,false).then(
 			orders=>{
 				res.status(200).json(orders)
 			}

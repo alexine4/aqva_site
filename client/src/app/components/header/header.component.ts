@@ -1,7 +1,8 @@
 import { Component, Injectable, OnInit } from '@angular/core';
 import { Title } from '@angular/platform-browser';
 import { RouterStateSnapshot, TitleStrategy } from '@angular/router';
-import { UserInfo } from '../shared/interfaces';
+import { OrderList, UserInfo } from '../shared/interfaces';
+import { OrderService } from '../shared/services/order.service';
 import { UserService } from '../shared/services/user.service';
 
 @Component({
@@ -15,11 +16,13 @@ import { UserService } from '../shared/services/user.service';
 export class HeaderComponent extends TitleStrategy implements OnInit {
   titl?: string
   userInfo!: UserInfo
+  orderList!: OrderList
 
 
 
   constructor(public readonly title: Title,
-    private userService: UserService
+    private userService: UserService,
+    private orderService: OrderService
   ) {
     super();
   }
@@ -29,6 +32,13 @@ export class HeaderComponent extends TitleStrategy implements OnInit {
       UserInfo => {
         if (UserInfo !== null) {
           this.userInfo = UserInfo
+          this.orderService.fetchActual().subscribe(
+            order => {
+              this.orderList = order
+              console.log(order);
+
+            }
+          )
         }
 
 
