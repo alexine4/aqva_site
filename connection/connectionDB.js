@@ -16,7 +16,7 @@ exports.typeDB = typeDB
 		nameDB,
 		loginDB,
 		passwordDB,
-		{	host: '127.0.0.1',
+		{	host: '127.0.0.1', // default localhost
 			port: 3306,
 			dialect: typeDB
 		
