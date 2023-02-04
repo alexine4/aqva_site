@@ -9,7 +9,6 @@ import { MatDialogModule, MAT_DIALOG_DEFAULT_OPTIONS } from '@angular/material/d
 import { MatInputModule } from '@angular/material/input';
 import { MatMenuModule } from '@angular/material/menu';
 import { NgModule } from '@angular/core';
-import { NgxSpinnerModule } from 'ngx-spinner';
 import { TokenInterceptor } from './components/shared/classes/token.interceptor';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 
@@ -101,15 +100,16 @@ import { SorterProductsPipe } from './components/shared/pipes/sorter-products.pi
     MatMenuModule,
     MatDialogModule,
     MatInputModule,
-    NgxSpinnerModule,
     ReactiveFormsModule
 
   ],
   providers: [
     AuthService,
     AuthGuard,
-    { provide: MAT_DIALOG_DEFAULT_OPTIONS, useValue: { hasBackdrop: true } },
-
+    {
+      provide: MAT_DIALOG_DEFAULT_OPTIONS,
+      useValue: { hasBackdrop: true }
+    },
     {
       provide: HTTP_INTERCEPTORS,
       multi: true,
