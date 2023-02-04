@@ -30,7 +30,7 @@ export class DatabaseComponent implements OnInit {
   images!: Image[]
   color!: Color[]
 
-
+  loading = true
   score!: number
   firstLayer = true
   secondLayer = false
@@ -74,6 +74,7 @@ export class DatabaseComponent implements OnInit {
 
     // get positiion
     this.getPosition()
+
 
 
   }
@@ -434,9 +435,9 @@ export class DatabaseComponent implements OnInit {
 
     this.viewPositions$.subscribe(
       positions => {
-
-
-
+        setTimeout(() => {
+          this.loading = false
+        }, 1000);
         for (let index = 0; index < positions.length; index++) {
           let id = positions[index].idPosition
           if (id !== undefined) {

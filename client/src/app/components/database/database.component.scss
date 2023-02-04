@@ -4,7 +4,10 @@ $md3:768px;
 $md4:450px;
 .container{
 	overflow: hidden;
-
+display: flex;
+align-items: center;
+justify-content: space-between;
+flex-direction: column;
 }
 .database-container {
 	position: relative;
@@ -13,7 +16,6 @@ $md4:450px;
 	align-items: center;
 	justify-content: center;
 	
-
 	
 }
 .category-header {
@@ -412,8 +414,17 @@ line-height: 19px;
 
 .loader{
 	display: flex;
+
 	position: relative;
 	top:   -330px;
+}
+.loader-main{
+	display: flex;
+	align-items:center ;
+	justify-content: center;
+	
+	height: 555px;
+	
 }
 
 .back{

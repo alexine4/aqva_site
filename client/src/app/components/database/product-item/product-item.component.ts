@@ -96,8 +96,10 @@ export class ProductItemComponent implements OnInit {
               company: position.company
             }
           }
+          setTimeout(() => {
+            this.loading = false
+          }, 1000);
 
-          this.loading = false
         }
       )
   }

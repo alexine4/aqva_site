@@ -1,5 +1,5 @@
 <div class="container">
-  <div class="database-container">
+  <div class="database-container" *ngIf="!loading; else loaderMain">
     <div class="category-header">
       <div class="category-header__title">{{menuTitle === '' ? 'Animals & Plants': menuTitle | titlecase}}
         <span>{{score}}</span>
@@ -29,7 +29,7 @@
           class="position " [ngClass]=" viewPosition.amount>0?'hover-border' : 'hover-border-silver'"
           [routerLink]="['/database/product-item/', viewPosition.idPosition]">
 
-          <div *ngIf="images.length > 0 ; else loader" class="position__image">
+          <div *ngIf="images.length > 0 " class="position__image">
             <div *ngFor="let image of images">
 
               <img class="image-box"
@@ -200,6 +200,11 @@
 
 <ng-template #loader>
   <div class="loader">
+    <app-loader></app-loader>
+  </div>
+</ng-template>
+<ng-template #loaderMain>
+  <div class="loader-main">
     <app-loader></app-loader>
   </div>
 </ng-template>
